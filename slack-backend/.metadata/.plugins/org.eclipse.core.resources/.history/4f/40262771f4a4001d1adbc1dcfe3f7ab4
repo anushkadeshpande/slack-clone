@@ -1,0 +1,21 @@
+package com.example.slack.controller;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.slack.model.ChatModel;
+
+//import org.springframework.stereotype.Controller;
+
+@RestController
+public class SlackController {
+
+	
+	@PostMapping("/send")
+	  public ResponseEntity<ChatModel> createData(@RequestBody ChatModel chatModel) {
+//	    Data createdData = myService.createData(data);
+	    return ResponseEntity.ok(createdData);
+	  }
+}

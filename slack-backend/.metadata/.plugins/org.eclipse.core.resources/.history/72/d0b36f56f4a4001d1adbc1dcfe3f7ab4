@@ -1,0 +1,5 @@
+package com.example.slack.model;
+
+public class ChatModel {
+
+}
