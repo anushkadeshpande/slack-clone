@@ -1,0 +1,43 @@
+.ChatArea {
+    color: #fff;
+}
+
+.ChatArea__input{
+    position: fixed;
+    bottom: 10px;
+    height: 100px;
+    border: 1px solid #686868;
+    border-radius: 20px;
+    width: 75vw;
+    /* display: flex; */
+}
+
+.ChatArea__input > input {
+    width: 90%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    margin-left: 20px;
+    margin-top: 20px;
+    white-space: normal;
+  word-wrap: break-word;
+    /* text-overflow: ellipsis; */
+}
+
+#send {
+    background-color: transparent;
+    border: none;
+    margin: none;
+    height: 20px;
+    width: 20px;
+    position: relative;
+    bottom: -55px;
+    right: -55px;
+}
+
+#send > svg {
+    height: 20px;
+    width: 20px;
+    color: #808080;
+}

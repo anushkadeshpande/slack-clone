@@ -1,0 +1,85 @@
+.SideBar {
+    background-color: #19171D;
+    height: 100%;
+    width: 20vw;
+    border-right: 1px solid #ffffff1a;
+    color: #fff;
+    
+}
+.SideBar__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 15px 7px 15px; 
+    box-sizing: border-box;
+    border-bottom: 1px solid #ffffff1a;
+} 
+
+.SideBar__title > p {
+    font-size: 18px;
+    font-weight: 700;  
+    color: #fff !important;  
+}
+
+.SideBar__title > svg {
+    height: 17px;
+    width: 17px;
+    color: black;
+    padding: 7px;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+.SideBar__menu, .SideBar__channels {
+    color: #d1d2d3b3;
+    font-size: 15px;
+    padding: 7px 15px 7px 15px; 
+    box-sizing: border-box;
+    border-bottom: 1px solid #ffffff1a;
+    display: flex;
+    flex-direction: column;
+
+    /* justify-items: center; */
+}
+
+.SideBar__menu > span, .SideBar__channels > span {
+    display: flex;
+    align-items: center;
+    margin-bottom: 7px;
+}
+
+.SideBar__menu > span > svg {
+    height: 22px;
+    width: 22px;
+    margin-right: 10px;
+}
+
+.SideBar__channels > span > svg {
+    height: 18px;
+    width: 18px;
+    margin-right: 16px;
+}
+
+
+.SideBar__channels {
+    border-bottom: none;
+}
+
+#addChannelButton {
+    margin-left: -3px !important;
+}
+
+#addChannelButton > svg{
+    background-color: #38353E;
+    padding: 3px;
+    border-radius: 3px;   
+}
+
+#addChannelButton > p{
+    margin-left: -3px !important;
+}
+
+.SideBar__channels > span:hover {
+ background-color: #27242C;
+ cursor: pointer;
+}

@@ -1,0 +1,66 @@
+.HeaderBar {
+    height: 44px;
+    width: 100%;
+    background-color: #121016;
+    border-bottom: 1px solid #ffffff1a;
+
+    display: flex;
+    align-items: center;
+}
+
+.HeaderBar__searchSection {
+    color: #989898;    
+    display: flex;
+    align-items: center;
+    width: 53%;
+    justify-content: space-evenly;
+    margin: auto auto;
+}
+
+.HeaderBar__searchSection > svg, .HeaderBar__accountSection>svg {
+    height: 21px;
+    width: 21px;
+}
+
+#searchField {
+    background-color: #3E3D42;
+    border: 1px solid #ffffff52;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    padding: 3px 7px 3px 7px;
+    border-radius: 5px;
+    color: #cfcfcf; 
+    height: 20px; 
+}
+
+#searchField > input     {
+    width: 45vw;
+    background: transparent;
+    border: 1px solid transparent;
+    outline: none;
+    color: #fff;
+}
+
+#searchField > svg {
+    height: 15px;
+    width: 15px;
+    /* margin-right: 5px; */
+    margin-left: 5px;
+}
+
+.HeaderBar__accountSection {
+    color: #989898;
+    display: flex;
+    width: 6%;
+    justify-content: space-evenly;
+    margin-right: 5px;
+    align-items: center;
+}
+
+.profileButton {
+    height: 25px; 
+    width: 25px;
+    background-color: #ffaa7f;
+    border-radius: 3px;
+} 
