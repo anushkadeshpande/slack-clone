@@ -7,13 +7,19 @@
     bottom: 10px;
     height: 100px;
     border: 1px solid #686868;
-    border-radius: 20px;
-    width: 75vw;
-    /* display: flex; */
+    border-radius: 8px;
+    width: calc(100% - 290px);
+    display:flex; 
+    margin-left: 20px;
+    margin-right: 20px;
+    flex-direction:column; 
+    flex:1
 }
 
 .ChatArea__input > input {
-    width: 90%;
+    /* display: flex; */
+    width: 95%;
+    height: 70%;
     background-color: transparent;
     border: none;
     outline: none;
@@ -22,22 +28,50 @@
     margin-top: 20px;
     white-space: normal;
   word-wrap: break-word;
+ 
     /* text-overflow: ellipsis; */
 }
 
 #send {
     background-color: transparent;
     border: none;
-    margin: none;
+    display: flex;
+    /* margin: none; */
     height: 20px;
     width: 20px;
-    position: relative;
-    bottom: -55px;
-    right: -55px;
+   
+    margin-left: auto;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    /* align-self: flex-end; */
+
 }
 
 #send > svg {
     height: 20px;
     width: 20px;
     color: #808080;
+}
+
+@media screen and (max-width: 800px) {
+    .ChatArea__input {
+        width: calc(100% - 240px);
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .ChatArea__input {
+        margin-left: 10px;
+        margin-right: 10px;
+        width: calc(100% - 20px);
+    }
+
+    /* 
+    toggle button
+        display: block
+    */
+
+    /* 
+    in js on toggle button click, drawer appears
+    */
 }

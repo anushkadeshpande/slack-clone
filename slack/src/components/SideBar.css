@@ -1,7 +1,7 @@
 .SideBar {
     background-color: #19171D;
     height: 100%;
-    width: 20vw;
+    width: 250px;
     border-right: 1px solid #ffffff1a;
     color: #fff;
     
@@ -82,4 +82,25 @@
 .SideBar__channels > span:hover {
  background-color: #27242C;
  cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+    .SideBar {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .SideBar {
+        display: none;
+    }
+
+    /* 
+    toggle button
+        display: block
+    */
+
+    /* 
+    in js on toggle button click, drawer appears
+    */
 }
