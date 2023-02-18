@@ -2,6 +2,24 @@ import { useState } from "react";
 import "./ChatAreaInput.css";
 const ChatAreaInput = () => {
   const [chatInput, setChatInput] = useState("");
+
+  const sendMessage = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    fetch('http://localhost:8080/send', {  
+    method: 'POST', 
+    // mode: 'cors', 
+    headers: {
+        'Content-Type': 'application/json'
+      },
+    body: JSON.stringify({
+        name: "Anna",
+        message: chatInput
+    })
+
+  }).then(response => console.log(response))
+
+  setChatInput("")
+  }
   return (
     <div className="ChatAreaInput">
       {/* <input
@@ -20,7 +38,7 @@ const ChatAreaInput = () => {
         console.log(chatInput);
       }}
       />
-      <button id="send">
+      <button id="send" onClick={(e: React.MouseEvent<HTMLButtonElement>) => sendMessage(e)}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
