@@ -4,15 +4,22 @@ const ChatAreaInput = () => {
   const [chatInput, setChatInput] = useState("");
   return (
     <div className="ChatAreaInput">
-      <input
+      {/* <input
         type="textarea"
         value={chatInput}
         onChange={(e) => {
           setChatInput(e.target.value);
           console.log(chatInput);
         }}
-      />
+      /> */}
 
+      <textarea 
+      value={chatInput}
+      onChange={(e) => {
+        setChatInput(e.target.value);
+        console.log(chatInput);
+      }}
+      />
       <button id="send">
         <svg
           xmlns="http://www.w3.org/2000/svg"

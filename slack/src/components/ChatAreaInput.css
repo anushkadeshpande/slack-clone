@@ -14,9 +14,10 @@
   background-color: #222529;
 }
 
-.ChatAreaInput > input {
+.ChatAreaInput > textarea {
   width: 95%;
   height: 70%;
+  resize: none;
   background-color: transparent;
   border: none;
   outline: none;
@@ -43,6 +44,20 @@
   width: 20px;
   color: #808080;
 }
+
+.ChatAreaInput > textarea::-webkit-scrollbar {
+  width: 5px;
+}
+
+.ChatAreaInput > textarea::-webkit-scrollbar-track {
+  background: #34373b;
+}
+
+/* Handle */
+.ChatAreaInput > textarea::-webkit-scrollbar-thumb {
+  background: #424242;
+}
+
 
 @media screen and (max-width: 800px) {
   .ChatAreaInput {
