@@ -33,8 +33,11 @@ build/
 .vscode/
 
 
-slack-backend/slack/src/main/resources/application.properties
+slack-backend/slack/src/main/resources/*
 
-slack-backend/.metadata
+slack-backend/.metadata/
 
-slack-backend/slack/.mvn
+slack-backend/slack/.mvn/
+
+slack-backend/slack/mvnw
+slack-backend/slack/mvnw.cmd
