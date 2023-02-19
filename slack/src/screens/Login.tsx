@@ -1,8 +1,10 @@
 import {useState} from 'react'
 import './Login.css'
+import { useDispatch , useSelector } from "react-redux";
+import { logout, login, selectUser } from '../features/userSlice';
 
 const Login = () => {
-
+  const dispatch = useDispatch();
   const [userName, setUsername] = useState("");
   const [userDetails, setUserDetails] = useState({})
   const checkUser = () => {
@@ -19,6 +21,7 @@ const Login = () => {
   .then(response => {
     if(response != null)
       setUserDetails(response)
+      dispatch(login(response))
 })
   }
 
