@@ -1,4 +1,4 @@
-package com.example.slack;
+package com.example.slack.dto;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

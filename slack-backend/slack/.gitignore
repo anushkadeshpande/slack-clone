@@ -35,9 +35,7 @@ build/
 
 /slack-backend/slack/src/main/resources/
 
-/slack-backend/.metadata/
-
 /slack-backend/slack/.mvn/
 
-slack-backend/slack/mvnw
-slack-backend/slack/mvnw.cmd
+/slack-backend/slack/mvnw
+/slack-backend/slack/mvnw.cmd
