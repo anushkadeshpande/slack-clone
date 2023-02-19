@@ -5,6 +5,10 @@ const Login = () => {
 
   const [userName, setUsername] = useState("");
 
+  const checkUser = () => {
+    
+  }
+
   return (
     <div className="Login">
       <div className="Login__banner">
@@ -21,7 +25,7 @@ const Login = () => {
         <input onChange={(e) => setUsername(e.target.value)} value={userName}/>
       </div>
 
-      <button className="Login__continue">Continue</button>
+      <button className="Login__continue" onClick={() => {checkUser()}}>Continue</button>
     </div>
   )
 }
