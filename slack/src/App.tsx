@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import Home from './screens/Home';
 
 import './App.css';
+import Login from './screens/Login';
 
 function App() {
 
@@ -10,7 +11,8 @@ function App() {
       {/* check login
       ifUserLoggedIn? goto homepage 
       : loginScreen || signUpScreen */}
-      <Home />
+      {/* <Home /> */}
+      <Login />
     </div>
   );
 }

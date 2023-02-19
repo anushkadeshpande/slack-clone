@@ -35,7 +35,7 @@ const ChatAreaInput = () => {
       value={chatInput}
       onChange={(e) => {
         setChatInput(e.target.value);
-        console.log(chatInput);
+        // console.log(chatInput);
       }}
       />
       <button id="send" onClick={(e: React.MouseEvent<HTMLButtonElement>) => sendMessage(e)}>
