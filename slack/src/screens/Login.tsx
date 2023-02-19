@@ -4,9 +4,22 @@ import './Login.css'
 const Login = () => {
 
   const [userName, setUsername] = useState("");
-
+  const [userDetails, setUserDetails] = useState({})
   const checkUser = () => {
-    
+    fetch('http://192.168.1.37:8080/checkUser', {  
+    method: 'POST', 
+    headers: {
+        'Content-Type': 'application/json'
+      },
+    body: JSON.stringify({
+        "userName" : userName.toLowerCase()
+    })
+
+  }).then(response => response.json())
+  .then(response => {
+    if(response != null)
+      setUserDetails(response)
+})
   }
 
   return (

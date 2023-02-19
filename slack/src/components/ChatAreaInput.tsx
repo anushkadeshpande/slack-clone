@@ -22,15 +22,6 @@ const ChatAreaInput = () => {
   }
   return (
     <div className="ChatAreaInput">
-      {/* <input
-        type="textarea"
-        value={chatInput}
-        onChange={(e) => {
-          setChatInput(e.target.value);
-          console.log(chatInput);
-        }}
-      /> */}
-
       <textarea 
       value={chatInput}
       onChange={(e) => {

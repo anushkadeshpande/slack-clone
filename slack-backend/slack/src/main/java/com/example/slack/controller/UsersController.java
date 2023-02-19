@@ -1,6 +1,7 @@
 package com.example.slack.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -14,26 +15,30 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.slack.dto.Users;
 import com.example.slack.repository.UsersRepository;
+import com.google.gson.Gson;
 
 @RestController
 @CrossOrigin(origins = "*")
 public class UsersController {
 	
+	@Autowired
 	MongoTemplate mongoTemplate;
 	
 	@Autowired
 	private UsersRepository userRepo;
 	
-	@GetMapping("/checkUser") 
-	public boolean checkUser(@RequestBody String userName) {
-		Query query = new Query();
-		query.addCriteria(Criteria.where("name").is(userName));
+	@PostMapping("/checkUser") 
+	public Users checkUser(@RequestBody String userNameReq) {
+		Map jsonReq = new Gson().fromJson(userNameReq, Map.class);
+		String userName = (String) jsonReq.get("userName");
+        Query query = new Query();
+		query.addCriteria(Criteria.where("userName").is(userName));
 		List<Users> users = mongoTemplate.find(query, Users.class);
 		
 		if(users.size() == 1)
-			return true;
+			return users.get(0);
 		else 
-			return false;
+			return null;
 	}
 	
 	@PostMapping("/registerUser")
