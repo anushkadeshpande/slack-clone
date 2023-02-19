@@ -5,7 +5,7 @@ const ChatAreaInput = () => {
 
   const sendMessage = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    fetch('http://localhost:8080/send', {  
+    fetch('http://192.168.1.37:8080/send', {  
     method: 'POST', 
     // mode: 'cors', 
     headers: {

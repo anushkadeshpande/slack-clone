@@ -1,17 +1,17 @@
 .MessageSection {
     /* height */
     overflow: scroll;
-    
+    overflow-x: hidden;
 }
 
-.MessageSection > textarea::-webkit-scrollbar {
+.MessageSection::-webkit-scrollbar {
     width: 7px;
   }
   
-.MessageSection > textarea::-webkit-scrollbar-track {
+.MessageSection::-webkit-scrollbar-track {
     background: #1A1D21;
   }
 
-.ChatAreaInput > textarea::-webkit-scrollbar-thumb {
+.MessageSection::-webkit-scrollbar-thumb {
     background: #797C7E;
   }
