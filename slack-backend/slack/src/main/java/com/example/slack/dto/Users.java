@@ -10,7 +10,12 @@ public class Users {
 	    
 	    private String userName;
 	    private String password;
-	      
+	    
+	    public Users() {
+	    	this.userName = "";
+	    	this.password = "";
+	    }
+	    
 	    public Users(String userName, String password) {
 	        super();
 	        this.userName = userName;

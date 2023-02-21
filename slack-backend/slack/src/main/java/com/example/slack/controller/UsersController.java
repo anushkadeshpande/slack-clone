@@ -34,11 +34,11 @@ public class UsersController {
         Query query = new Query();
 		query.addCriteria(Criteria.where("userName").is(userName));
 		List<Users> users = mongoTemplate.find(query, Users.class);
-		
+//		return users.get(0);
 		if(users.size() == 1)
 			return users.get(0);
 		else 
-			return null;
+			return new Users();
 	}
 	
 	@PostMapping("/registerUser")

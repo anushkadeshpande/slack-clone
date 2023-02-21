@@ -2,11 +2,14 @@ import {useState} from 'react'
 import './Login.css'
 import { useDispatch , useSelector } from "react-redux";
 import { logout, login, selectUser } from '../features/userSlice';
+import { Navigate } from 'react-router-dom';
+import SignUp from './SignUp';
+import Auth from './Auth';
 
 const Login = () => {
   const dispatch = useDispatch();
   const [userName, setUsername] = useState("");
-  const [userDetails, setUserDetails] = useState({})
+  const [userDetails, setUserDetails] = useState(null)
   const checkUser = () => {
     fetch('http://192.168.1.37:8080/checkUser', {  
     method: 'POST', 
@@ -19,9 +22,19 @@ const Login = () => {
 
   }).then(response => response.json())
   .then(response => {
-    if(response != null)
+    if(response.userId != null) {
       setUserDetails(response)
+      response.isUserSignedIn = false;
+      console.log(response)
+      // window.location.href = '/auth'
       dispatch(login(response))
+      window.open('/auth')
+    }
+    else {
+      setUserDetails(response)
+      // window.location.href = '/signUp'
+      window.open(`/signUp`); 
+    }
 })
   }
 
@@ -42,6 +55,16 @@ const Login = () => {
       </div>
 
       <button className="Login__continue" onClick={() => {checkUser()}}>Continue</button>
+
+      {/* {!userDetails?
+      <Navigate to='/signup' />
+      :
+      <Navigate to='/auth' />
+    } */}
+    {/* {!userDetails?
+    <SignUp />
+  :
+  <Auth />} */}
     </div>
   )
 }
