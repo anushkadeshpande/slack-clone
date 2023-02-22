@@ -10,6 +10,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const [userName, setUsername] = useState("");
   const [userDetails, setUserDetails] = useState(null)
+  const [ redirect, setRedirect ] = useState(-1)
+
   const checkUser = () => {
     fetch('http://192.168.1.37:8080/checkUser', {  
     method: 'POST', 
@@ -28,12 +30,14 @@ const Login = () => {
       console.log(response)
       // window.location.href = '/auth'
       dispatch(login(response))
-      window.open('/auth')
+      setRedirect(0)
+      // window.open('/auth')
     }
     else {
       setUserDetails(response)
+      setRedirect(1)
       // window.location.href = '/signUp'
-      window.open(`/signUp`); 
+      // window.open(`/signUp`); 
     }
 })
   }
@@ -65,6 +69,13 @@ const Login = () => {
     <SignUp />
   :
   <Auth />} */}
+
+  {
+    redirect === 0?
+      <Navigate to='/auth' /> :
+      redirect === 1?
+      <Navigate to='/signup' /> : ""
+  }
     </div>
   )
 }
