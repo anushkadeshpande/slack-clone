@@ -3,8 +3,6 @@ import './Login.css'
 import { useDispatch , useSelector } from "react-redux";
 import { logout, login, selectUser } from '../features/userSlice';
 import { Navigate } from 'react-router-dom';
-import SignUp from './SignUp';
-import Auth from './Auth';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -28,16 +26,12 @@ const Login = () => {
       setUserDetails(response)
       response.isUserSignedIn = false;
       console.log(response)
-      // window.location.href = '/auth'
       dispatch(login(response))
       setRedirect(0)
-      // window.open('/auth')
     }
     else {
       setUserDetails(response)
       setRedirect(1)
-      // window.location.href = '/signUp'
-      // window.open(`/signUp`); 
     }
 })
   }
@@ -59,16 +53,6 @@ const Login = () => {
       </div>
 
       <button className="Login__continue" onClick={() => {checkUser()}}>Continue</button>
-
-      {/* {!userDetails?
-      <Navigate to='/signup' />
-      :
-      <Navigate to='/auth' />
-    } */}
-    {/* {!userDetails?
-    <SignUp />
-  :
-  <Auth />} */}
 
   {
     redirect === 0?

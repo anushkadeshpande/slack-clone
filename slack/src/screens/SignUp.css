@@ -1,0 +1,69 @@
+.SignUp {
+    height: 100vh;
+    width: 100vw;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.SignUp__banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.SignUp__banner__logo > img {
+    margin-top: 50px;
+    height: 100px;
+    margin-bottom: 50px;
+}
+
+.SignUp__banner__header {
+    font-family: 'Poppins', sans-serif;
+    font-size: xx-large;
+    font-weight: 800;
+}
+
+.SignUp__banner__header > p {
+    font-size: x-large;
+}
+
+.SignUp__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.SignUp__form > input {
+    width: 20vw;
+    font-size: 20px;
+    padding: 5px;
+    margin-top: 40px;
+    outline-color: #9adaff;
+}
+
+.SignUp__form > input:focus, .SignUp__form > input:hover {
+    box-shadow: 0px 0px 2.5px 2.5px #9adaff;
+    border: none;
+}
+
+.SignUp__form > button {
+    background-color: #62206A;
+    width: 20vw;
+    padding: 10px;
+    color: #fff;
+    border: none;
+    margin-top: 50px;
+    font-weight: 800;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+@media screen and (max-width: 500px) {
+    .SignUp__form > input, .SignUp__form > button {
+        width: 60vw;
+    }
+    
+}
