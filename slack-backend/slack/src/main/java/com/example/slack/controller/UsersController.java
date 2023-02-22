@@ -31,18 +31,29 @@ public class UsersController {
 	public Users checkUser(@RequestBody String userNameReq) {
 		Map jsonReq = new Gson().fromJson(userNameReq, Map.class);
 		String userName = (String) jsonReq.get("userName");
-        Query query = new Query();
+        return getUser(userName);
+	}
+	
+	@PostMapping("/registerUser")
+	public String registerUser(@RequestBody Users user) {
+		System.out.println(user);
+		Users users = getUser(user.getUserName());
+		if(users.getUserId() == null) {
+			userRepo.save(user);
+			return "";
+		}
+		else
+			return "A user with this username already exists. Please enter a new username!";
+	}
+	
+	
+	private Users getUser(String userName) {
+		Query query = new Query();
 		query.addCriteria(Criteria.where("userName").is(userName));
 		List<Users> users = mongoTemplate.find(query, Users.class);
-//		return users.get(0);
 		if(users.size() == 1)
 			return users.get(0);
 		else 
 			return new Users();
-	}
-	
-	@PostMapping("/registerUser")
-	public Users registerUser(@RequestBody Users user) {
-		return userRepo.save(user);
-	}
+	} 
 }
