@@ -1,0 +1,54 @@
+.Auth {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    background-color: #fff;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Poppins', sans-serif;
+}
+
+.Auth__banner__header > img {
+    margin-top: 50px;
+    height: 100px;
+    margin-bottom: 50px
+}
+
+.Auth__banner__text > p {
+    font-size: xx-large;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+}
+
+.Auth__form > input {
+    width: 20vw;
+    font-size: 20px;
+    padding: 5px;
+    margin-top: 40px;
+    outline-color: #9adaff;
+}
+
+.Auth__form > input:focus, .Auth__form > input:hover {
+    box-shadow: 0px 0px 2.5px 2.5px #9adaff;
+    border: none;
+}
+
+.Auth__submit {
+    background-color: #62206A;
+    width: 20vw;
+    padding: 10px;
+    color: #fff;
+    border: none;
+    margin-top: 50px;
+    font-weight: 800;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+@media screen and (max-width: 500px) {
+    .Auth__form > input, .Auth__submit {
+        width: 60vw;
+    }
+    
+}
