@@ -10,7 +10,7 @@ const Home = () => {
         <HeaderBar />
         <div className="Home__content">
 
-        <SideBar />
+        <SideBar view="desktop" />
         <ChatArea />
         </div>
     </div>
