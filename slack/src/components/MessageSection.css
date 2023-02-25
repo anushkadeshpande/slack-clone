@@ -17,3 +17,21 @@
 .MessageSection::-webkit-scrollbar-thumb {
     background: #797C7E;
   }
+
+  .MessageSection__message {
+    display: flex;
+    
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .MessageSection__message > div > p {
+    line-height: 1;
+    margin-left: 10px;
+  } 
+   
+  @media screen and (max-width: 550px) {
+    .MessageSection {
+      margin-left: 10px;
+    }
+  }
