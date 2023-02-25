@@ -6,15 +6,32 @@ import './Auth.css'
 
 const Auth = () => {
   const user = useSelector(selectUser);
+  const dispatch = useDispatch()
   const [password, setPassword] = useState("")
   const [redirect, setRedirect] = useState(0)
   const checkUser = () => {
     if (user?.password == password) {
+
         setRedirect(1)
-    } 
+        fetch('http://192.168.1.37:8080/getUserProfile', {  
+    method: 'POST', 
+    headers: {
+        'Content-Type': 'application/json'
+      },
+    body: JSON.stringify({
+        "userName" : user.userName.toLowerCase()
+    })
+
+  }).then(response => response.json())
+  .then(response => {
+    if(response.userId != null) {
+      dispatch(login(response))
+    }
+
+    } )
+  }
     else 
       setRedirect(2)
-    // console.log(user)
   }
   return (
     <div className="Auth">

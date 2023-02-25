@@ -4,22 +4,30 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Users {
+public class UserProfile {
 	   @Id
 	    private String userId;
 	    
 	    private String userName;
-	    private String password;
+	    private String userDPCol;
 	    
-	    public Users() {
+	    public UserProfile() {
 	    	this.userName = "";
-	    	this.password = "";
+	    	this.userDPCol = "";
 	    }
 	    
-	    public Users(String userName, String password) {
+	    public String getUserDPCol() {
+			return userDPCol;
+		}
+
+		public void setUserDPCol(String userDPCol) {
+			this.userDPCol = userDPCol;
+		}
+
+		public UserProfile(String userName, String col) {
 	        super();
 	        this.userName = userName;
-	        this.password = password;
+	        this.userDPCol = col;
 	    }
 	    public String getUserId() {
 			return userId;
@@ -37,13 +45,5 @@ public class Users {
 			this.userName = userName;
 		}
 
-		public String getPassword() {
-			return password;
-		}
-
-		public void setPassword(String password) {
-			this.password = password;
-		}
-
-		
+	
 }

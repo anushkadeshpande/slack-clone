@@ -1,6 +1,10 @@
 import { useState } from "react";
 import "./ChatAreaInput.css";
+import { selectUser } from "../features/userSlice";
+import { useSelector } from "react-redux";
+
 const ChatAreaInput = () => {
+  const user = useSelector(selectUser)
   const [chatInput, setChatInput] = useState("");
 
   const sendMessage = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -12,7 +16,7 @@ const ChatAreaInput = () => {
         'Content-Type': 'application/json'
       },
     body: JSON.stringify({
-        name: "Anna",
+        name: user.userName,
         message: chatInput
     })
 

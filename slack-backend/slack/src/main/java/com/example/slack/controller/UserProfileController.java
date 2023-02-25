@@ -13,53 +13,48 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.slack.dto.UserProfile;
 import com.example.slack.dto.Users;
-import com.example.slack.repository.UsersRepository;
+import com.example.slack.repository.UserProfileRepository;
 import com.google.gson.Gson;
+
 
 @RestController
 @CrossOrigin(origins = "*")
-public class UsersController {
-	
+public class UserProfileController {
+
 	@Autowired
 	MongoTemplate mongoTemplate;
 	
 	@Autowired
-	private UsersRepository userRepo;
+	private UserProfileRepository userProfileRepo;
 	
-	@PostMapping("/checkUser") 
-	public Users checkUser(@RequestBody String userNameReq) {
+	@PostMapping("/addUserProfile")
+	public UserProfile addUserProfile(@RequestBody UserProfile userProfile) {
+		return userProfileRepo.save(userProfile);
+	}
+	
+	@PostMapping("/getUserProfile")
+	public UserProfile getUserProfile(@RequestBody String userNameReq) {
 		Map jsonReq = new Gson().fromJson(userNameReq, Map.class);
 		String userName = (String) jsonReq.get("userName");
-        return getUser(userName);
-	}
-	
-	@PostMapping("/registerUser")
-	public String registerUser(@RequestBody Users user) {
-		System.out.println(user);
-		Users users = getUser(user.getUserName());
-		if(users.getUserId() == null) {
-			userRepo.save(user);
-			return "";
-		}
-		else
-			return "A user with this username already exists. Please enter a new username!";
-	}
-	
-	
-	private Users getUser(String userName) {
-		List<Users> users = findUser(userName);
+		List<UserProfile> users = findUser(userName);
 		if(users.size() == 1)
 			return users.get(0);
 		else 
-			return new Users();
+			return new UserProfile();
 	} 
 	
-	public List<Users> findUser(String userName) {
+	public List<UserProfile> findUser(String userName) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("userName").is(userName));
-		List<Users> users = mongoTemplate.find(query, Users.class);
+		List<UserProfile> users = mongoTemplate.find(query, UserProfile.class);
 		
 		return users;
+	}
+	
+	@GetMapping("/getAllUserProfiles")
+	public List<UserProfile> getAllUserProfiles() {
+		return userProfileRepo.findAll();
 	}
 }

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useDispatch , useSelector } from "react-redux";
 import { Navigate } from 'react-router-dom';
 import { logout, login, selectUser } from '../features/userSlice';
+import colors from '../assets/colorsRepo';
 
 import './SignUp.css'
 
@@ -10,7 +11,7 @@ const SignUp = () => {
   const [ userName, setUserName ] = useState("")
   const [ password, setPassword ] = useState("")
   const [ redirect, setRedirect ] = useState(-1)
-
+  const colForThisUser = colors[Math.floor(Math.random() * colors.length)];
   const registerUser = () => {
     fetch('http://192.168.1.37:8080/registerUser', {  
     method: 'POST', 
@@ -19,18 +20,31 @@ const SignUp = () => {
       },
     body: JSON.stringify({
         "userName" : userName.toLowerCase(),
-        "password" : password
+        "password" : password,
+        "userDPCol":  colForThisUser
     })
 
   }).then(response => response.text())
   .then(response => {
-    console.log(response)
+    // console.log(response)
     if(response == "") {
       setRedirect(0)
+
+        fetch('http://192.168.1.37:8080/addUserProfile', {  
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify({
+            "userName" : userName.toLowerCase(),
+            "userDPCol":  colForThisUser
+        })}).then(response => response.text())
+        .then(response => {
+      // if(response == "")
       dispatch(login({
         "userName": userName,
-        "password": password 
-      }))
+        "userDPCol": colForThisUser
+        }))})
     }
   })
   }
