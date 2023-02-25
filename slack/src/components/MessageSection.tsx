@@ -28,7 +28,7 @@ const MessageSection = () => {
 
             setAllUsers(u)
         })
-    }, [])
+    })
     
     useEffect(() => {
         fetch('http://192.168.1.37:8080/getAllMessages')
@@ -37,7 +37,7 @@ const MessageSection = () => {
     }, [messages]) 
 
     
-// console.log(allUsers)
+// console.log(messages)
     
   return (
     <div className="MessageSection">

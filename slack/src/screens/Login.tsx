@@ -25,7 +25,7 @@ const Login = () => {
     if(response.userId != null) {
       setUserDetails(response)
       response.isUserSignedIn = false;
-      console.log(response)
+      // console.log(response)
       dispatch(login(response))
       setRedirect(0)
     }
