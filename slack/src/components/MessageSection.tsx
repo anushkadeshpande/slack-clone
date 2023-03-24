@@ -63,6 +63,16 @@ const MessageSection = () => {
   let onMessageReceived = (msg: any) => {
     setMessages(prevState => [...prevState, msg])
   }
+
+  // const messagesEndRef = useRef(null)
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages]);
   return (
     <div className="MessageSection" ref={messagesRef}>
       <SockJsClient
@@ -88,6 +98,7 @@ const MessageSection = () => {
           </div>
         </div>
       ))}
+       <div ref={messagesEndRef} />
     </div>
   );
 };
