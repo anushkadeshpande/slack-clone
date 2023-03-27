@@ -18,7 +18,7 @@ const MessageSection = () => {
 
   const messagesRef = useRef<HTMLDivElement>(null);
   const user = useSelector(selectUser);
-  const [messages, setMessages] = useState<any[]>([]);
+  const [messagesData, setMessagesData] = useState<any[]>([]);
   const [allUsers, setAllUsers] = useState<Map<string, UserData>>(new Map());
  
 
@@ -43,7 +43,10 @@ const MessageSection = () => {
   useEffect(() => {
     fetch("http://192.168.1.37:8080/getAllMessages")
       .then((data) => data.json())
-      .then((data) => setMessages(data));
+      .then((data) => {
+        console.log(data)
+        setMessagesData(data)
+      });
   }, []);
   // const [webSocket, setWebSocket] = useState<WebSocket | null>(null);
 
@@ -52,16 +55,12 @@ const MessageSection = () => {
 
   }, []);
 
-  const showGreeting = (message: any) => {
-    console.log(message)
-  }
-
   let onConnected = () => {
     console.log("Connected!!")
   }
 
   let onMessageReceived = (msg: any) => {
-    setMessages(prevState => [...prevState, msg])
+    // setMessagesData(prevState => [...prevState, msg])
   }
 
   // const messagesEndRef = useRef(null)
@@ -72,7 +71,7 @@ const MessageSection = () => {
   }
   useEffect(() => {
     scrollToBottom()
-  }, [messages]);
+  }, [messagesData]);
   return (
     <div className="MessageSection" ref={messagesRef}>
       <SockJsClient
@@ -84,9 +83,11 @@ const MessageSection = () => {
         debug={false}
       />
 
-      {messages.map(({ userId, name, message }) => (
-        <div key={userId}>
-          <div className="MessageSection__message">
+      {messagesData.map(({ channelId, messages }) => (
+        <div key={channelId}>
+          <h5>{channelId.day}/{channelId.month}/{channelId.year}</h5>
+          {messages.map(({userId, name, message} : any) => (
+          <div className="MessageSection__message" key={userId}>
             <Person color={allUsers?.get(name)?.userDPCol} />
 
             <div>
@@ -96,6 +97,8 @@ const MessageSection = () => {
               <p style={{ whiteSpace: "pre-line", marginTop: "7px", lineHeight: 1.2, fontSize:"15px" }}> {message}</p>
             </div>
           </div>
+        
+        ))}
         </div>
       ))}
        <div ref={messagesEndRef} />

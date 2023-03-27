@@ -1,8 +1,13 @@
 package com.example.slack.controller;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatus;
@@ -17,8 +22,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.slack.dto.Channel;
 import com.example.slack.dto.Message;
+import com.example.slack.repository.ChannelRepository;
 import com.example.slack.repository.MessageRepository;
+import com.mongodb.client.FindIterable;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -30,9 +38,24 @@ public class MessageController {
 	@Autowired
 	SimpMessagingTemplate template;
 	
+	@Autowired
+	ChannelController chController;
+	
+	@Autowired
+	private ChannelRepository channelRepo;
+	
+	@Autowired
+	private MongoTemplate mongoTemplate;
+	
 	@PostMapping("/send")
 	public ResponseEntity<Void> sendMessage(@RequestBody Message textMessageDTO) {
-		messageRepo.save(textMessageDTO);
+		messageRepo.save(textMessageDTO);		
+		Set<String> coll = mongoTemplate.getCollectionNames();
+		
+		
+		
+		Channel ch = chController.insert(textMessageDTO);
+
 		template.convertAndSend("/topic/message", textMessageDTO);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
@@ -52,8 +75,8 @@ public class MessageController {
 //	}
 	
 	@GetMapping("/getAllMessages")
-	public List<Message> getAllUser(){
-		return messageRepo.findAll();
+	public List<Channel> getAllUser(){
+		return channelRepo.findAll();
 	}
 	
 	
