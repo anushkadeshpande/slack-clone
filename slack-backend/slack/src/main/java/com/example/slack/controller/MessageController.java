@@ -1,6 +1,8 @@
 package com.example.slack.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Set;
 
@@ -41,20 +43,32 @@ public class MessageController {
 	@Autowired
 	ChannelController chController;
 	
-	@Autowired
-	private ChannelRepository channelRepo;
+//	@Autowired
+//	private ChannelRepository channelRepo;
 	
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	
 	@PostMapping("/send")
 	public ResponseEntity<Void> sendMessage(@RequestBody Message textMessageDTO) {
+		
+//		LocalDate currentDate = LocalDate.now();
+//		org.bson.Document dateId =  new org.bson.Document("year", currentDate.getYear())
+//                .append("month", currentDate.getMonth())
+//                .append("day",currentDate.getDayOfMonth());
+		ZoneId zid = ZoneId.of("Asia/Kolkata");
+		System.out.println(zid);
+		
+//		LocalDateTime now = LocalDateTime.now(zid);  
+//		System.out.println(now);
+//		textMessageDTO.setTimestamp(now);
+		System.out.println(textMessageDTO);
 		messageRepo.save(textMessageDTO);		
-		Set<String> coll = mongoTemplate.getCollectionNames();
-		
-		
-		
-		Channel ch = chController.insert(textMessageDTO);
+//		Set<String> coll = mongoTemplate.getCollectionNames();
+//		
+//		
+//		
+//		Channel ch = chController.insert(textMessageDTO);
 
 		template.convertAndSend("/topic/message", textMessageDTO);
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -75,8 +89,8 @@ public class MessageController {
 //	}
 	
 	@GetMapping("/getAllMessages")
-	public List<Channel> getAllUser(){
-		return channelRepo.findAll();
+	public List<Message> getAllUser(){
+		return messageRepo.findAll();
 	}
 	
 	

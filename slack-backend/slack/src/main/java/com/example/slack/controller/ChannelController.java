@@ -18,49 +18,49 @@ import com.mongodb.client.FindIterable;
 
 @Service
 public class ChannelController {
-	@Autowired
-	private ChannelRepository channelRepo;
-	
-	@Autowired
-	private MongoTemplate mongoTemplate;
-	
-	public Channel insert(Message m) {
+//	@Autowired
+//	private ChannelRepository channelRepo;
+//	
+//	@Autowired
+//	private MongoTemplate mongoTemplate;
+//	
+//	public Channel insert(Message m) {
+////		LocalDate currentDate = LocalDate.now();
+////		int year = currentDate.getYear();
+////		int month = currentDate.getMonthValue();
+////		int day = currentDate.getDayOfMonth();
+////		
+////		Document idDoc = new Document("year", year)
+////                .append("month", month)
+////                .append("day",day);
 //		LocalDate currentDate = LocalDate.now();
-//		int year = currentDate.getYear();
-//		int month = currentDate.getMonthValue();
-//		int day = currentDate.getDayOfMonth();
+//		org.bson.Document dateId =  new org.bson.Document("year", currentDate.getYear())
+//                .append("month", currentDate.getMonth())
+//                .append("day",currentDate.getDayOfMonth());
 //		
-//		Document idDoc = new Document("year", year)
-//                .append("month", month)
-//                .append("day",day);
-		LocalDate currentDate = LocalDate.now();
-		org.bson.Document dateId =  new org.bson.Document("year", currentDate.getYear())
-                .append("month", currentDate.getMonth())
-                .append("day",currentDate.getDayOfMonth());
-		
-		boolean a = checkIfExists(dateId);
-		Channel ch = null;
-		List<Message> messageList = new ArrayList<Message>();
-		messageList.add(m);
-		if(!a) {
-			
-			ch = new Channel(dateId, messageList);
-			
-		}
-		else {
-				
-			Query query = new Query(Criteria.where("_id").is(dateId));
-			ch = mongoTemplate.findOne(query, Channel.class, "channel");
-			ch.getMessages().add(m);
-		}
-		// get message id
-		channelRepo.save(ch);
-		
-		return ch;
-	}
-	
-	public boolean checkIfExists(Document dateDoc) {
-		Query query = new Query(Criteria.where("_id").is(dateDoc));
-		return mongoTemplate.exists(query, "channel");
-	}
+//		boolean a = checkIfExists(dateId);
+//		Channel ch = null;
+//		List<Message> messageList = new ArrayList<Message>();
+//		messageList.add(m);
+//		if(!a) {
+//			
+//			ch = new Channel(dateId, messageList);
+//			
+//		}
+//		else {
+//				
+//			Query query = new Query(Criteria.where("_id").is(dateId));
+//			ch = mongoTemplate.findOne(query, Channel.class, "channel");
+//			ch.getMessages().add(m);
+//		}
+//		// get message id
+//		channelRepo.save(ch);
+//		
+//		return ch;
+//	}
+//	
+//	public boolean checkIfExists(Document dateDoc) {
+//		Query query = new Query(Criteria.where("_id").is(dateDoc));
+//		return mongoTemplate.exists(query, "channel");
+//	}
 }

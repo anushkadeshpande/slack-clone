@@ -17,7 +17,8 @@ const ChatAreaInput = () => {
       },
     body: JSON.stringify({
         name: user.userName,
-        message: chatInput
+        message: chatInput,
+        timestamp: new Date(Date.now()).toLocaleString("en-US", {timeZone: "Asia/Kolkata"})
     })
 
   }).then(response => console.log(response))
