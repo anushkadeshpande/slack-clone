@@ -1,37 +1,69 @@
 .MessageSection {
   margin-top: 20px;
   margin-left: 30px;
-    height: 70vh;
-    overflow: scroll;
-    overflow-x: hidden;
+  /* margin-right: 30px; */
+  height: 70vh;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
 .MessageSection::-webkit-scrollbar {
-    width: 7px;
-  }
-  
+  width: 7px;
+}
+
 .MessageSection::-webkit-scrollbar-track {
-    background: #1A1D21;
-  }
+  background: #1a1d21;
+}
 
 .MessageSection::-webkit-scrollbar-thumb {
-    background: #797C7E;
-  }
+  background: #797c7e;
+}
 
-  .MessageSection__message {
-    display: flex;
-    
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
+.MessageSection__message {
+  display: flex;
 
-  .MessageSection__message > div > p {
-    line-height: 1;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.MessageSection__message > div > p {
+  line-height: 1;
+  margin-left: 10px;
+}
+.messages__date__section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.messages__date__section > span {
+  border-top: 1px solid #5d5d5d;
+  width: calc(50% - 60px);
+}
+
+#right-side-line {
+  margin-right: 30px;
+}
+
+.messages__date {
+  width: fit-content;
+  padding: 3px 7px 3px 7px;
+  border-radius: 14px;
+  border: 1px solid #5d5d5d;
+  font-size: 12px;
+  font-weight: 600;
+  color: #979797;
+  width: 100px;
+  text-align: center;
+}
+
+@media screen and (max-width: 550px) {
+  .MessageSection {
     margin-left: 10px;
-  } 
-   
-  @media screen and (max-width: 550px) {
-    .MessageSection {
-      margin-left: 10px;
-    }
   }
+
+  #right-side-line {
+    margin-right: 10px;
+  }
+}

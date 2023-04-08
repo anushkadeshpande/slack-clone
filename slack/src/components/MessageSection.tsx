@@ -79,6 +79,62 @@ const MessageSection = () => {
     scrollToBottom();
   }, [messagesData]);
 
+  const getFormattedDate = (date: string) => {
+    let dateParams = date.split("/");
+    let dateString = "";
+    // sorting out the date
+    if (dateParams[1] === "1") dateString += "1st";
+    else if (dateParams[1] === "2") dateString += "2nd";
+    else if (dateParams[1] === "3") dateString += "3rd";
+    else dateString += dateParams[1] + "th";
+
+    // sorting out month
+    switch (dateParams[0]) {
+      case "1":
+        dateString += " Jan";
+        break;
+      case "2":
+        dateString += " Feb";
+        break;
+      case "3":
+        dateString += " Mar";
+        break;
+      case "4":
+        dateString += " Apr";
+        break;
+      case "5":
+        dateString += " May";
+        break;
+      case "6":
+        dateString += " Jun";
+        break;
+      case "7":
+        dateString += " Jul";
+        break;
+      case "8":
+        dateString += " Aug";
+        break;
+      case "9":
+        dateString += " Sep";
+        break;
+      case "10":
+        dateString += " Oct";
+        break;
+      case "11":
+        dateString += " Nov";
+        break;
+      case "12":
+        dateString += " Dec";
+        break;
+    }
+
+    // year
+
+    dateString += " " + dateParams[2];
+
+    return dateString;
+  };
+
   console.log(messagesData);
   return (
     <div className="MessageSection" ref={messagesRef}>
@@ -91,7 +147,11 @@ const MessageSection = () => {
 
       {messagesData.map((data) => (
         <>
-          <p>{data[0]}</p>
+          <div className="messages__date__section">
+            <span />
+            <p className="messages__date">{getFormattedDate(data[0])}</p>
+            <span id="right-side-line" />
+          </div>
           {data[1]?.map((messageData: any) => (
             <div
               className="MessageSection__message"
