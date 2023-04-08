@@ -1,18 +1,19 @@
-import { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
-import { selectMenu } from '../features/menuSlice';
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { selectMenu } from "../features/menuSlice";
 
-import SideBar from './SideBar'
+import SideBar from "./SideBar";
 import "./HeaderBar.css";
-import { showMenu } from '../features/menuSlice';
-import { selectUser } from '../features/userSlice';
-import Person from '../assets/Person';
+import { showMenu } from "../features/menuSlice";
+import { selectUser } from "../features/userSlice";
+import Person from "../assets/Person";
 
 const HeaderBar = () => {
   const menu = useSelector(selectMenu);
-  const user = useSelector(selectUser)
+  const user = useSelector(selectUser);
 
   const dispatch = useDispatch();
+  const [ userMenu, setUserMenu ] = useState(false)
   // const [ menu, setMenu ] = useState(false)
   return (
     <div className="HeaderBar">
@@ -88,7 +89,7 @@ const HeaderBar = () => {
         </div>
       </div>
 
-      <div className="HeaderBar__accountSection">
+      <div className="HeaderBar__accountSection" onClick={() => setUserMenu(!userMenu)}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -103,17 +104,48 @@ const HeaderBar = () => {
             d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"
           />
         </svg>
+        <div className="user_menu" style={userMenu? {display: "block"} : {display: "none"}}>
+          <div className="user_menu_option">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+            </svg>
+            <span>Profile</span>
+          </div>
+          <div className="user_menu_option" style={{borderBottom: "none"}}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+              />
+            </svg>
+            <span>Logout</span>
+          </div>
+        </div>
         <div className="profileButton">
           <Person color={user.userDPCol} />
         </div>
       </div>
 
-      {
-        menu?
-        <SideBar view="mobile" /> : ""
-      }
-
-      
+      {menu ? <SideBar view="mobile" /> : ""}
     </div>
   );
 };
