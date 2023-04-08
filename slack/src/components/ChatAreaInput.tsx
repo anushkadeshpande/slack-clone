@@ -11,6 +11,7 @@ const ChatAreaInput = () => {
 
   const sendMessage = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    if(chatInput != "") {
     fetch('http://192.168.1.37:8080/'+channel+'/send', {  
     method: 'POST', 
     // mode: 'cors', 
@@ -26,6 +27,7 @@ const ChatAreaInput = () => {
   }).then(response => console.log(response))
 
   setChatInput("")
+}
   }
   return (
     <div className="ChatAreaInput">

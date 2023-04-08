@@ -1,7 +1,7 @@
 .ChatAreaInput {
   position: fixed;
   bottom: 10px;
-  height: 100px;
+  height: 70px;
   border: 1px solid #424242;
   border-radius: 8px;
   width: calc(100% - 290px);
@@ -16,14 +16,14 @@
 
 .ChatAreaInput > textarea {
   width: 95%;
-  height: 70%;
+  height: 70px;
   resize: none;
   background-color: transparent;
   border: none;
   outline: none;
   color: #fff;
   margin-left: 20px;
-  margin-top: 20px;
+  margin-top: 5px;
   white-space: normal;
   word-wrap: break-word;
 }
@@ -45,6 +45,10 @@
   color: #808080;
 }
 
+#send > svg:hover {
+  cursor: pointer;
+  color: #a5a5a5;
+}
 .ChatAreaInput > textarea::-webkit-scrollbar {
   width: 5px;
 }
