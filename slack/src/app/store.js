@@ -1,6 +1,7 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import userReducer from '../features/userSlice';
 import menuReducer from '../features/menuSlice';
+import currentChannelReducer from '../features/currentChannelSlice'
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
@@ -19,7 +20,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user: userReducer,
   // menu: persistReducer(menuPersistConfig, menuReducer)
-  menu: menuReducer
+  menu: menuReducer,
+  channel: currentChannelReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

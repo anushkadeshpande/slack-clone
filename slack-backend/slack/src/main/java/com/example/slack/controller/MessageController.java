@@ -37,11 +37,11 @@ public class MessageController {
 	@Autowired
 	private MessageRepository messageRepo;
 	
-	@Autowired
-	SimpMessagingTemplate template;
+//	@Autowired
+//	SimpMessagingTemplate template;
 	
-	@Autowired
-	ChannelController chController;
+//	@Autowired
+//	ChannelController chController;
 	
 //	@Autowired
 //	private ChannelRepository channelRepo;
@@ -49,47 +49,27 @@ public class MessageController {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	
-	@PostMapping("/send")
-	public ResponseEntity<Void> sendMessage(@RequestBody Message textMessageDTO) {
-		
-//		LocalDate currentDate = LocalDate.now();
-//		org.bson.Document dateId =  new org.bson.Document("year", currentDate.getYear())
-//                .append("month", currentDate.getMonth())
-//                .append("day",currentDate.getDayOfMonth());
-		ZoneId zid = ZoneId.of("Asia/Kolkata");
-		System.out.println(zid);
-		
-//		LocalDateTime now = LocalDateTime.now(zid);  
-//		System.out.println(now);
-//		textMessageDTO.setTimestamp(now);
-		System.out.println(textMessageDTO);
-		messageRepo.save(textMessageDTO);		
-//		Set<String> coll = mongoTemplate.getCollectionNames();
-//		
-//		
-//		
-//		Channel ch = chController.insert(textMessageDTO);
-
-		template.convertAndSend("/topic/message", textMessageDTO);
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
-	
-	@MessageMapping("/sendMessage")
-	public void receiveMessage(@Payload Message textMessageDTO) {
-		// receive message from client
-	}
-
-	@SendTo("/topic/message")
-	public Message broadcastMessage(@Payload Message textMessageDTO) {
-		return textMessageDTO;
-	}
 //	@PostMapping("/send")
-//	public Message sendMessage(@RequestBody Message message) {
-//		return messageRepo.save(message);
+//	public ResponseEntity<Void> sendMessage(@RequestBody Message textMessageDTO) {
+//		// in current channel, append the message to the messages list
+//		
+//		messageRepo.save(textMessageDTO);		
+//		template.convertAndSend("/topic/message", textMessageDTO);
+//		return new ResponseEntity<>(HttpStatus.OK);
+//	}
+//	
+//	@MessageMapping("/sendMessage")
+//	public void receiveMessage(@Payload Message textMessageDTO) {
+//		// receive message from client
+//	}
+//
+//	@SendTo("/topic/message")
+//	public Message broadcastMessage(@Payload Message textMessageDTO) {
+//		return textMessageDTO;
 //	}
 	
-	@GetMapping("/getAllMessages")
-	public List<Message> getAllUser(){
+	public List<Message> getAllMessages(){
+		System.out.println(messageRepo.findAll());
 		return messageRepo.findAll();
 	}
 	

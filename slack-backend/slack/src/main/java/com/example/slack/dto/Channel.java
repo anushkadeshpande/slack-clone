@@ -8,21 +8,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Channel {
     @Id
-    org.bson.Document channelId;
+    String channelId;
     
     private List<Message> messages;
       
-    public Channel(org.bson.Document channelId, List<Message> messages) {
+    public Channel(String channelId, List<Message> messages) {
 		super();
 		this.channelId = channelId;
 		this.messages = messages;
 	}
 
-	public org.bson.Document getChannelId() {
+	public String getChannelId() {
 		return channelId;
 	}
 
-	public void setChannelId(org.bson.Document channelId) {
+	public void setChannelId(String channelId) {
 		this.channelId = channelId;
 	}
 

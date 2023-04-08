@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import Person from "../assets/Person";
 import { selectUser } from "../features/userSlice";
+import { selectChannel } from "../features/currentChannelSlice";
 import "./MessageSection.css";
 
 import SockJsClient from "react-stomp";
@@ -22,9 +23,10 @@ const SOCKET_URL = "http://192.168.1.37:8080/ws-message";
 const MessageSection = () => {
   const messagesRef = useRef<HTMLDivElement>(null);
   const user = useSelector(selectUser);
+  const channel = useSelector(selectChannel);
   const [messagesData, setMessagesData] = useState<any[]>([]);
   const [allUsers, setAllUsers] = useState<Map<string, UserData>>(new Map());
-
+  console.log(channel)
   useEffect(() => {
     fetch("http://192.168.1.37:8080/getAllUserProfiles")
       .then((data) => data.json())
@@ -38,7 +40,7 @@ const MessageSection = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://192.168.1.37:8080/getAllMessages")
+    fetch("http://192.168.1.37:8080/"+channel+"/getAllMessages")
       .then((data) => data.json())
       .then((data) => {
         console.log(data);
@@ -55,9 +57,12 @@ const MessageSection = () => {
           )
         );
       });
-  }, []);
+  }, [channel]);
 
   let onMessageReceived = (msg: any) => {
+    if(messagesData.length == 0) 
+      setMessagesData([[msg.timestamp.split(",")[0], [msg]]])
+    else {
     setMessagesData((prevState) => {
       const updatedState = prevState.map((stateObj) => {
         if (stateObj[0] === msg.timestamp.split(",")[0]) {
@@ -68,6 +73,7 @@ const MessageSection = () => {
       console.log(updatedState);
       return updatedState;
     });
+  }
   };
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -140,7 +146,7 @@ const MessageSection = () => {
     <div className="MessageSection" ref={messagesRef}>
       <SockJsClient
         url={SOCKET_URL}
-        topics={["/topic/message"]}
+        topics={["/topic/"+channel]}
         onMessage={(msg: any) => onMessageReceived(msg)}
         debug={false}
       />

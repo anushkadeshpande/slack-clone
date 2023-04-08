@@ -123,3 +123,7 @@
     in js on toggle button click, drawer appears
     */
 }
+
+.selected_channel {
+    background-color: #38353E;
+}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'  
 import { useDispatch, useSelector } from 'react-redux';
 import { hideMenu, selectMenu } from '../features/menuSlice';
+import { setChannel, selectChannel } from '../features/currentChannelSlice';
 
 import "./SideBar.css";
 
@@ -11,8 +12,10 @@ interface ChildComponentProps {
 const SideBar = ({view}: ChildComponentProps) => {
   console.log(view)
   const menu = useSelector(selectMenu)
+  const channel = useSelector(selectChannel)
   const dispatch = useDispatch()
   const [ styleClassName, setStyleClassName ] = useState("SideBar")
+  const [ selectedChannel, setSelectedChannel ] = useState("main")
 
   useEffect(() => {
   if(view==="mobile" && menu) 
@@ -26,6 +29,10 @@ const SideBar = ({view}: ChildComponentProps) => {
       setStyleClassName("hide_menu")
     
   }, [menu])
+
+  useEffect(() => {
+    dispatch(setChannel(selectedChannel))
+  }, [selectedChannel])
 
   return (
     <div className={styleClassName}>
@@ -121,8 +128,32 @@ const SideBar = ({view}: ChildComponentProps) => {
           </svg>
           <p>Channels</p>
         </span>
+        <span onClick={() => 
+          setSelectedChannel("main")} className={selectedChannel === "main"? "selected_channel" : ""}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5"
+            />
+          </svg>
 
-        <span>
+          <p>main</p>
+        </span>
+
+
+        <span onClick={() => {
+          // dispatch(setChannel("random1"))
+          // console.log(channel)
+          setSelectedChannel("random")
+        }}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -141,7 +172,8 @@ const SideBar = ({view}: ChildComponentProps) => {
           <p>random</p>
         </span>
 
-        <span>
+        <span onClick={() => 
+          setSelectedChannel("play")}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -160,7 +192,8 @@ const SideBar = ({view}: ChildComponentProps) => {
           <p>play</p>
         </span>
 
-        <span>
+        <span onClick={() => 
+          setSelectedChannel("code")}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

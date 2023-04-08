@@ -2,14 +2,16 @@ import { useState } from "react";
 import "./ChatAreaInput.css";
 import { selectUser } from "../features/userSlice";
 import { useSelector } from "react-redux";
+import { selectChannel } from "../features/currentChannelSlice";
 
 const ChatAreaInput = () => {
   const user = useSelector(selectUser)
   const [chatInput, setChatInput] = useState("");
+  const channel = useSelector(selectChannel);
 
   const sendMessage = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    fetch('http://192.168.1.37:8080/send', {  
+    fetch('http://192.168.1.37:8080/'+channel+'/send', {  
     method: 'POST', 
     // mode: 'cors', 
     headers: {
