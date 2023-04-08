@@ -147,13 +147,7 @@ const SideBar = ({view}: ChildComponentProps) => {
 
           <p>main</p>
         </span>
-
-
-        <span onClick={() => {
-          // dispatch(setChannel("random1"))
-          // console.log(channel)
-          setSelectedChannel("random")
-        }}>
+        <span onClick={() => setSelectedChannel("random")} className={selectedChannel === "random"? "selected_channel" : ""}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -172,8 +166,7 @@ const SideBar = ({view}: ChildComponentProps) => {
           <p>random</p>
         </span>
 
-        <span onClick={() => 
-          setSelectedChannel("play")}>
+        <span onClick={() => setSelectedChannel("play")} className={selectedChannel === "play"? "selected_channel" : ""}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -192,8 +185,7 @@ const SideBar = ({view}: ChildComponentProps) => {
           <p>play</p>
         </span>
 
-        <span onClick={() => 
-          setSelectedChannel("code")}>
+        <span onClick={() => setSelectedChannel("code")} className={selectedChannel === "code"? "selected_channel" : ""}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
