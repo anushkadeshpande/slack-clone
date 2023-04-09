@@ -1,0 +1,76 @@
+.Add_ch_Dialog {
+    position: absolute;
+    z-index: 500;
+    top: 50%;
+    left: 50%;
+    background-color: #262627;
+    height: 220px;
+    width: 500px;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+
+.Add_dialog_header {
+    margin: 10px;
+    margin-left: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.close-button > svg {
+    height: 30px;
+    color: aliceblue;
+}
+
+.Add_channel_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Add_channel_section > input {
+    padding: 5px;
+    font-size: large;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: none;
+    outline: none;
+    background-color: #686868;
+    color: #fff;
+}
+
+.Add_channel_section > input::placeholder {
+    color: #a4a4a4;
+}
+
+.Add_channel_section > button {
+    border: none;
+    outline: none;
+    padding: 7px;
+    font-weight: 600;
+    color: #fff;
+    border-radius: 5px;
+    background-color: #62206A;
+    cursor: pointer;
+}
+
+.Add_channel_section > button:hover{
+    background-color: #45164a;
+    transition: 0.2s ease;
+}
+
+@media screen and (max-width: 550px) {
+    .Add_ch_Dialog {
+        width: 90vw;
+        flex-direction: column;
+        align-items: center;
+    }
+}

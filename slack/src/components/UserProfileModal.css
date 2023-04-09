@@ -102,6 +102,13 @@
     margin-bottom: 20px;
     padding: 3px;
     outline: none;
+    background-color: #686868;
+    color: #fff;
+    border: none;
+}
+
+.userPassword > input::placeholder {
+    color: #a4a4a4;
 }
 
 .userPassword > button {

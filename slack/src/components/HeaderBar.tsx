@@ -69,7 +69,7 @@ const HeaderBar = () => {
           </svg>
 
           <div id="searchField">
-            <input placeholder={"Search " + channel} />
+            <input placeholder={"Search " + channel} autoComplete="false" disabled/>
 
             <svg
               xmlns="http://www.w3.org/2000/svg"

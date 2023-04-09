@@ -1,11 +1,15 @@
 package com.example.slack.controller;
 
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -22,6 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.slack.dto.Channel;
 import com.example.slack.dto.Message;
+import com.example.slack.model.ChannelModel;
+//import com.example.slack.repository.ChannelListRepository;
 import com.example.slack.repository.ChannelRepository;
 
 @RestController
@@ -30,6 +36,9 @@ public class ChannelController {
 	@Autowired
 	private ChannelRepository channelRepo;
 	
+//	@Autowired
+//	private ChannelListRepository channelListRepo;
+//	
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	
@@ -77,6 +86,43 @@ public class ChannelController {
 		System.out.println(ch);
 	// return messages array from that channel
 		return(ch.get().getMessages());
+	}
+	
+	@GetMapping("/getChannelsList")
+	public List<ChannelModel> getChannelsList() {
+		List<ChannelModel> channels = getAllChannels();
+	        return channels;
+	}
+	
+	@PostMapping("/addChannel") 
+	public String addChannel(@RequestBody ChannelModel newChannel) {
+	
+		List<ChannelModel> channels = getAllChannels();
+		System.out.println(channels);
+		System.out.println(newChannel);
 
+
+		
+		for(int i=0; i<channels.size(); i++) {
+			if(channels.get(i).getChannel().equals(newChannel.getChannel())) {
+				return "A channel with this name already exists";
+			}
+		}
+		
+		 
+			List<Message> messages = new ArrayList<Message>();
+			Channel ch = new Channel(newChannel.getChannel(), messages);
+			channelRepo.save(ch);
+			return "New channel created successfully!";
+		
+	}
+	
+	public List<ChannelModel> getAllChannels() {
+		Aggregation aggregation = Aggregation.newAggregation(
+	            Aggregation.project("_id")
+	        );
+	        AggregationResults<ChannelModel> result = mongoTemplate.aggregate(aggregation, "channel", ChannelModel.class);
+	        List<ChannelModel> channels = result.getMappedResults();
+	        return channels;
 	}
 }

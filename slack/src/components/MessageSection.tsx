@@ -26,7 +26,7 @@ const MessageSection = () => {
   const channel = useSelector(selectChannel);
   const [messagesData, setMessagesData] = useState<any[]>([]);
   const [allUsers, setAllUsers] = useState<Map<string, UserData>>(new Map());
-  console.log(channel)
+  // console.log(channel)
   useEffect(() => {
     fetch("http://192.168.1.37:8080/getAllUserProfiles")
       .then((data) => data.json())
@@ -43,7 +43,7 @@ const MessageSection = () => {
     fetch("http://192.168.1.37:8080/"+channel+"/getAllMessages")
       .then((data) => data.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setMessagesData(
           Object.entries(
             data.reduce((acc: any, cur: any) => {
@@ -70,7 +70,7 @@ const MessageSection = () => {
         }
         return stateObj;
       });
-      console.log(updatedState);
+      // console.log(updatedState);
       return updatedState;
     });
   }
@@ -141,7 +141,7 @@ const MessageSection = () => {
     return dateString;
   };
 
-  console.log(messagesData);
+  // console.log(messagesData);
   return (
     <div className="MessageSection" ref={messagesRef}>
       <SockJsClient

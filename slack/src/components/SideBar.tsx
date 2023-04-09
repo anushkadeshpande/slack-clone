@@ -1,43 +1,58 @@
-import { useState, useEffect } from 'react'  
-import { useDispatch, useSelector } from 'react-redux';
-import { hideMenu, selectMenu } from '../features/menuSlice';
-import { setChannel, selectChannel } from '../features/currentChannelSlice';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { hideMenu, selectMenu } from "../features/menuSlice";
+import { setChannel, selectChannel } from "../features/currentChannelSlice";
 
 import "./SideBar.css";
+import AddChannelDialog from "./AddChannelDialog";
 
 interface ChildComponentProps {
   view: String;
 }
 
-const SideBar = ({view}: ChildComponentProps) => {
-  console.log(view)
-  const menu = useSelector(selectMenu)
-  const channel = useSelector(selectChannel)
-  const dispatch = useDispatch()
-  const [ styleClassName, setStyleClassName ] = useState("SideBar")
-  const [ selectedChannel, setSelectedChannel ] = useState("main")
+interface channel {
+  channel: String;
+}
+
+const SideBar = ({ view }: ChildComponentProps) => {
+  // console.log(view);
+  const menu = useSelector(selectMenu);
+  const channel = useSelector(selectChannel);
+  const dispatch = useDispatch();
+  const [styleClassName, setStyleClassName] = useState("SideBar");
+  const [selectedChannel, setSelectedChannel] = useState("main");
+  const [channelsList, setChannelsList] = useState<any[]>([]);
+  const [addDialog, showAddDialog] = useState(false)
 
   useEffect(() => {
-  if(view==="mobile" && menu) 
-      setStyleClassName("m_SideBar")
-    
-    else if (view=== "desktop") 
-      setStyleClassName("SideBar")
-    
-    
-    else if (!menu && view === "mobile")
-      setStyleClassName("hide_menu")
-    
-  }, [menu])
+    if (view === "mobile" && menu) setStyleClassName("m_SideBar");
+    else if (view === "desktop") setStyleClassName("SideBar");
+    else if (!menu && view === "mobile") setStyleClassName("hide_menu");
+  }, [menu]);
 
   useEffect(() => {
-    dispatch(setChannel(selectedChannel))
-  }, [selectedChannel])
+    dispatch(setChannel(selectedChannel));
+  }, [selectedChannel]);
+
+  useEffect(() => {
+    const getChannelsList = async () => {
+      const channelsPromise = await fetch(
+        "http://192.168.1.37:8080/getChannelsList"
+      );
+      const channelsListJson = await channelsPromise.json();
+      setChannelsList(channelsListJson);
+    };
+
+    getChannelsList();
+  }, [addDialog]);
+  const [overlayVisible, setOverlayVisible] = useState(false);
 
   return (
     <div className={styleClassName}>
+      {overlayVisible && <div className="overlay" />}
       <div className="SideBar__title">
         <p>Test</p>
+        {/* desktop view */}
         {!menu ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -54,6 +69,7 @@ const SideBar = ({view}: ChildComponentProps) => {
             />{" "}
           </svg>
         ) : (
+          // phone view
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -61,14 +77,16 @@ const SideBar = ({view}: ChildComponentProps) => {
             strokeWidth={1.5}
             stroke="currentColor"
             className="w-6 h-6"
-            onClick={() => {dispatch(hideMenu())}}
+            onClick={() => {
+              dispatch(hideMenu());
+            }}
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               d="M6 18L18 6M6 6l12 12"
             />
-          </svg> 
+          </svg>
         )}
       </div>
       <div className="SideBar__menu">
@@ -128,83 +146,34 @@ const SideBar = ({view}: ChildComponentProps) => {
           </svg>
           <p>Channels</p>
         </span>
-        <span onClick={() => 
-          setSelectedChannel("main")} className={selectedChannel === "main"? "selected_channel" : ""}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
+
+        {channelsList.map((channel) => (
+          <span
+            onClick={() => setSelectedChannel(channel.channel)}
+            className={
+              selectedChannel === channel.channel ? "selected_channel" : ""
+            }
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5"
-            />
-          </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5"
+              />
+            </svg>
 
-          <p>main</p>
-        </span>
-        <span onClick={() => setSelectedChannel("random")} className={selectedChannel === "random"? "selected_channel" : ""}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5"
-            />
-          </svg>
+            <p>{channel.channel}</p>
+          </span>
+        ))}
 
-          <p>random</p>
-        </span>
-
-        <span onClick={() => setSelectedChannel("play")} className={selectedChannel === "play"? "selected_channel" : ""}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5"
-            />
-          </svg>
-
-          <p>play</p>
-        </span>
-
-        <span onClick={() => setSelectedChannel("code")} className={selectedChannel === "code"? "selected_channel" : ""}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5"
-            />
-          </svg>
-
-          <p>code</p>
-        </span>
-
-        <span id="addChannelButton">
+        <span id="addChannelButton" onClick={() => {showAddDialog(true)}}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -222,6 +191,8 @@ const SideBar = ({view}: ChildComponentProps) => {
           <p>Add Channels</p>
         </span>
       </div>
+
+      <AddChannelDialog addDialog={addDialog} showAddDialog={showAddDialog} setOverlayVisible={setOverlayVisible} />
     </div>
   );
 };
