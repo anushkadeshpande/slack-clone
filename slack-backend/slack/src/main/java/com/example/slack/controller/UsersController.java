@@ -4,16 +4,22 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.slack.dto.UserProfile;
 import com.example.slack.dto.Users;
+import com.example.slack.model.PasswordChangeModel;
 import com.example.slack.repository.UsersRepository;
 import com.google.gson.Gson;
 
@@ -61,5 +67,37 @@ public class UsersController {
 		List<Users> users = mongoTemplate.find(query, Users.class);
 		
 		return users;
+	}
+	
+	@PutMapping("{username}/changePassword")
+	public String changePassword(@PathVariable String username, @RequestBody PasswordChangeModel pwdChngBody) {
+		// get current password
+		List<Users> users = findUser(username);
+		String currentPassword = users.get(0).getPassword();
+		
+		// check if current password matches sent old password
+		if(currentPassword.equals(pwdChngBody.getOldPassword())) {
+			// if yes 
+			// update password
+			Query query = new Query().addCriteria(Criteria.where("userName").is(username));
+			Update updatePwd = new Update().set("password", pwdChngBody.getNewPassword());
+			FindAndModifyOptions options= new FindAndModifyOptions().upsert(true);
+			
+			mongoTemplate.findAndModify(query, updatePwd, options, Users.class);
+			
+			
+			return "Password changed successfully!";
+			
+		}
+		
+		else {
+			return "The current password is wrong";
+		}
+		
+		
+		
+		// else
+			// send error string
+		
 	}
 }

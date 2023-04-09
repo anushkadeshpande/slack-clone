@@ -8,7 +8,7 @@ import "./HeaderBar.css";
 import { showMenu } from "../features/menuSlice";
 import { selectUser, logout } from "../features/userSlice";
 import Person from "../assets/Person";
-import Modal from "./Modal";
+import UserProfileMenu from "./UserProfileModal";
 
 const HeaderBar = () => {
   const menu = useSelector(selectMenu);
@@ -163,7 +163,7 @@ const HeaderBar = () => {
       </div>
 
       {menu ? <SideBar view="mobile" /> : ""}
-      <Modal show={showDialog} handleModalVisibility={handleModalVisibility} handleOverlay={setOverlayVisible} user={user} />
+      <UserProfileMenu show={showDialog} handleModalVisibility={handleModalVisibility} handleOverlay={setOverlayVisible} user={user} />
     </div>
   );
 };

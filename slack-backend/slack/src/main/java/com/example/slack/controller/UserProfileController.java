@@ -66,8 +66,6 @@ public class UserProfileController {
 	
 	@PutMapping("/{userName}/updateUserDp")
 	public void updateUserDp(@PathVariable String userName,@RequestBody String newDpCol) {
-		System.out.println(userName);
-		System.out.println(newDpCol);
 		Query query = new Query().addCriteria(Criteria.where("userName").is(userName));
 		Update updateDpCol = new Update().set("userDPCol", newDpCol);
 		FindAndModifyOptions options= new FindAndModifyOptions().upsert(true);
