@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectMenu } from "../features/menuSlice";
+import { selectChannel } from "../features/currentChannelSlice";
 import { redirect, useNavigate } from "react-router-dom";
 
 import SideBar from "./SideBar";
@@ -13,6 +14,7 @@ import UserProfileMenu from "./UserProfileModal";
 const HeaderBar = () => {
   const menu = useSelector(selectMenu);
   const user = useSelector(selectUser);
+  const channel = useSelector(selectChannel)
 
   const dispatch = useDispatch();
   const [ userMenu, setUserMenu ] = useState(false)
@@ -67,7 +69,7 @@ const HeaderBar = () => {
           </svg>
 
           <div id="searchField">
-            <input placeholder="Search {placeholder}" />
+            <input placeholder={"Search " + channel} />
 
             <svg
               xmlns="http://www.w3.org/2000/svg"
