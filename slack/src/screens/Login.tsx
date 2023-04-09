@@ -1,14 +1,24 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import './Login.css'
 import { useDispatch , useSelector } from "react-redux";
 import { logout, login, selectUser } from '../features/userSlice';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useDispatch();
   const [userName, setUsername] = useState("");
   const [userDetails, setUserDetails] = useState(null)
   const [ redirect, setRedirect ] = useState(-1)
+  const user = useSelector(selectUser)
+  const navigate = useNavigate()
+
+  // if user is already logged in, go to home
+  useEffect(()=> {
+    if(user)
+     navigate('/home')
+    else
+      navigate("/")
+  }, [])
 
   const checkUser = () => {
     fetch('http://192.168.1.37:8080/checkUser', {  
@@ -24,8 +34,8 @@ const Login = () => {
   .then(response => {
     if(response.userId != null) {
       setUserDetails(response)
-      response.isUserSignedIn = false;
       // console.log(response)
+      response.isUserAuthenticated = false
       dispatch(login(response))
       setRedirect(0)
     }
@@ -37,6 +47,7 @@ const Login = () => {
   }
 
   return (
+    
     <div className="Login">
       <div className="Login__banner">
         <div className="Login__banner__header">

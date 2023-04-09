@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectMenu } from "../features/menuSlice";
+import { redirect, useNavigate } from "react-router-dom";
 
 import SideBar from "./SideBar";
 import "./HeaderBar.css";
 import { showMenu } from "../features/menuSlice";
-import { selectUser } from "../features/userSlice";
+import { selectUser, logout } from "../features/userSlice";
 import Person from "../assets/Person";
 
 const HeaderBar = () => {
@@ -14,6 +15,7 @@ const HeaderBar = () => {
 
   const dispatch = useDispatch();
   const [ userMenu, setUserMenu ] = useState(false)
+  const navigate = useNavigate();
   // const [ menu, setMenu ] = useState(false)
   return (
     <div className="HeaderBar">
@@ -122,7 +124,7 @@ const HeaderBar = () => {
             </svg>
             <span>Profile</span>
           </div>
-          <div className="user_menu_option" style={{borderBottom: "none"}}>
+          <div className="user_menu_option" style={{borderBottom: "none"}} onClick={()=> {dispatch(logout()); navigate("/")}}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

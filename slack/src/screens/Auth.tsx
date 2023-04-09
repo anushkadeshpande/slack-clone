@@ -1,7 +1,7 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import { useDispatch , useSelector } from "react-redux";
 import { logout, login, selectUser } from '../features/userSlice';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import './Auth.css'
 
 const Auth = () => {
@@ -9,6 +9,14 @@ const Auth = () => {
   const dispatch = useDispatch()
   const [password, setPassword] = useState("")
   const [redirect, setRedirect] = useState(0)
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if(user.isUserAuthenticated)
+    navigate("/home")
+  }, [])
+
   const checkUser = () => {
     if (user?.password == password) {
 
@@ -25,6 +33,7 @@ const Auth = () => {
   }).then(response => response.json())
   .then(response => {
     if(response.userId != null) {
+      response.isUserAuthenticated = true
       dispatch(login(response))
     }
 
