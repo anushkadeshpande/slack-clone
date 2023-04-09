@@ -1,22 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
-
+import { createSlice } from "@reduxjs/toolkit";
 
 export const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState: {
     user: null,
   },
-//actions
+  //actions
   reducers: {
-    login:(state, action) => {
+    login: (state, action) => {
       state.user = action.payload;
     },
-    logout:(state) => {
+    logout: (state) => {
       state.user = null;
     },
     changeUserDpColor: (state, color) => {
-      state.user.userDPCol = color.payload
-    }
+      state.user.userDPCol = color.payload;
+    },
   },
 });
 

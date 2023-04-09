@@ -22,7 +22,7 @@ const SideBar = ({ view }: ChildComponentProps) => {
   const [styleClassName, setStyleClassName] = useState("SideBar");
   const [selectedChannel, setSelectedChannel] = useState("main");
   const [channelsList, setChannelsList] = useState<any[]>([]);
-  const [addDialog, showAddDialog] = useState(false)
+  const [addDialog, showAddDialog] = useState(false);
 
   useEffect(() => {
     if (view === "mobile" && menu) setStyleClassName("m_SideBar");
@@ -37,7 +37,7 @@ const SideBar = ({ view }: ChildComponentProps) => {
   useEffect(() => {
     const getChannelsList = async () => {
       const channelsPromise = await fetch(
-        "http://192.168.1.37:8080/getChannelsList"
+        "https://slack-backend.up.railway.app/getChannelsList"
       );
       const channelsListJson = await channelsPromise.json();
       setChannelsList(channelsListJson);
@@ -173,7 +173,12 @@ const SideBar = ({ view }: ChildComponentProps) => {
           </span>
         ))}
 
-        <span id="addChannelButton" onClick={() => {showAddDialog(true)}}>
+        <span
+          id="addChannelButton"
+          onClick={() => {
+            showAddDialog(true);
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -192,7 +197,11 @@ const SideBar = ({ view }: ChildComponentProps) => {
         </span>
       </div>
 
-      <AddChannelDialog addDialog={addDialog} showAddDialog={showAddDialog} setOverlayVisible={setOverlayVisible} />
+      <AddChannelDialog
+        addDialog={addDialog}
+        showAddDialog={showAddDialog}
+        setOverlayVisible={setOverlayVisible}
+      />
     </div>
   );
 };

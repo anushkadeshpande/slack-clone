@@ -22,16 +22,14 @@ function App() {
 
   return (
     <div className="App">
-        {/* <>{(user === null || user.isUserAuthenticated == false)? navigate("/") : navigate("/home")}</> */}
+      {/* <>{(user === null || user.isUserAuthenticated == false)? navigate("/") : navigate("/home")}</> */}
 
-
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/" element={<Login />} />
-          <Route path="/signUp" element={<SignUp />} />
-          <Route path="/auth" element={<Auth />} />
-        </Routes>
-     
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/signUp" element={<SignUp />} />
+        <Route path="/auth" element={<Auth />} />
+      </Routes>
     </div>
   );
 }

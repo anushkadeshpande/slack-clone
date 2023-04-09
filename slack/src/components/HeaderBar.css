@@ -1,125 +1,126 @@
 .HeaderBar {
-    height: 44px;
-    width: 100%;
-    background-color: #121016;
-    border-bottom: 1px solid #ffffff1a;
-    display: flex;
-    align-items: center;
+  height: 44px;
+  width: 100%;
+  background-color: #121016;
+  border-bottom: 1px solid #ffffff1a;
+  display: flex;
+  align-items: center;
 }
 
 .HeaderBar__left {
-    width: 70vw;
-    display: flex;
-    margin-left: auto;
+  width: 70vw;
+  display: flex;
+  margin-left: auto;
 }
 
 .HeaderBar__searchSection {
-    color: #989898;    
-    display: flex;
-    align-items: center;
-    margin: auto auto;
+  color: #989898;
+  display: flex;
+  align-items: center;
+  margin: auto auto;
 }
 
-.HeaderBar__searchSection > svg, .HeaderBar__accountSection>svg {
-    height: 21px;
-    width: 21px;
+.HeaderBar__searchSection > svg,
+.HeaderBar__accountSection > svg {
+  height: 21px;
+  width: 21px;
 }
 
 #searchField {
-    background-color: #3E3D42;
-    border: 1px solid #ffffff52;
-    display: flex;
-    align-items: center;
-    font-size: 13px;
-    padding: 3px 7px 3px 7px;
-    border-radius: 5px;
-    color: #cfcfcf; 
-    height: 20px; 
-    margin-left: 20px;
+  background-color: #3e3d42;
+  border: 1px solid #ffffff52;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  padding: 3px 7px 3px 7px;
+  border-radius: 5px;
+  color: #cfcfcf;
+  height: 20px;
+  margin-left: 20px;
 }
 
-#searchField > input     {
-    width: 45vw;
-    background: transparent;
-    border: 1px solid transparent;
-    outline: none;
-    color: #fff;
+#searchField > input {
+  width: 45vw;
+  background: transparent;
+  border: 1px solid transparent;
+  outline: none;
+  color: #fff;
 }
 
 #searchField > svg {
-    height: 15px;
-    width: 15px;
-    margin-left: 5px;
+  height: 15px;
+  width: 15px;
+  margin-left: 5px;
 }
 
 .HeaderBar__accountSection {
-    color: #989898;
-    display: flex;
-    margin-left: auto;
+  color: #989898;
+  display: flex;
+  margin-left: auto;
 }
 
 .HeaderBar__accountSection:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .profileButton > div {
-    height: 25px; 
-    width: 25px;
-    margin-left: 15px;
-    margin-right: 20px;
-} 
+  height: 25px;
+  width: 25px;
+  margin-left: 15px;
+  margin-right: 20px;
+}
 
 @media screen and (max-width: 800px) {
-    .HeaderBar__left {
-        margin-left: 0px;
-    }
+  .HeaderBar__left {
+    margin-left: 0px;
   }
+}
 
 .HeaderBar > svg {
-    height: 23px;
-    width: 23px;
-    color: #fff;
-    margin-left: 5px;
-    margin-right: 5px;
+  height: 23px;
+  width: 23px;
+  color: #fff;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .user_menu {
-    display: none;
-    position: absolute;
-    top: 44px;
-    right: 20px;
-    /* height: 90px; */
-    width: 100px;
-    background-color: #3E3D42;
-    border-radius: 10px;
+  display: none;
+  position: absolute;
+  top: 44px;
+  right: 20px;
+  /* height: 90px; */
+  width: 100px;
+  background-color: #3e3d42;
+  border-radius: 10px;
 }
 
 .user_menu_option {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 0.2px solid #2e2e2e;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 0.2px solid #2e2e2e;
 }
 
 .user_menu_option > svg {
-    height: 20px;
-    width: 20px;
-    margin-right: 10px;
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
 }
 
 .user_menu_option:hover {
-    cursor: pointer;
-    background-color: #5a5a5a;
-    border-radius: 10px;
-    animation: 0.3s ease;
+  cursor: pointer;
+  background-color: #5a5a5a;
+  border-radius: 10px;
+  animation: 0.3s ease;
 }
 
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}

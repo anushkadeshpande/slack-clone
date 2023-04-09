@@ -19,7 +19,7 @@ interface messData {
   message: string;
 }
 
-const SOCKET_URL = "http://192.168.1.37:8080/ws-message";
+const SOCKET_URL = "https://slack-backend.up.railway.app/ws-message";
 const MessageSection = () => {
   const messagesRef = useRef<HTMLDivElement>(null);
   const user = useSelector(selectUser);
@@ -28,7 +28,7 @@ const MessageSection = () => {
   const [allUsers, setAllUsers] = useState<Map<string, UserData>>(new Map());
   // console.log(channel)
   useEffect(() => {
-    fetch("http://192.168.1.37:8080/getAllUserProfiles")
+    fetch("https://slack-backend.up.railway.app/getAllUserProfiles")
       .then((data) => data.json())
       .then((data) => {
         const u = new Map();
@@ -40,7 +40,7 @@ const MessageSection = () => {
   }, [user]);
 
   useEffect(() => {
-    fetch("http://192.168.1.37:8080/"+channel+"/getAllMessages")
+    fetch("https://slack-backend.up.railway.app/" + channel + "/getAllMessages")
       .then((data) => data.json())
       .then((data) => {
         // console.log(data);
@@ -60,20 +60,20 @@ const MessageSection = () => {
   }, [user, channel]);
 
   let onMessageReceived = (msg: any) => {
-    if(messagesData.length == 0) 
-      setMessagesData([[msg.timestamp.split(",")[0], [msg]]])
+    if (messagesData.length == 0)
+      setMessagesData([[msg.timestamp.split(",")[0], [msg]]]);
     else {
-    setMessagesData((prevState) => {
-      const updatedState = prevState.map((stateObj) => {
-        if (stateObj[0] === msg.timestamp.split(",")[0]) {
-          return [stateObj[0], [...stateObj[1], msg]];
-        }
-        return stateObj;
+      setMessagesData((prevState) => {
+        const updatedState = prevState.map((stateObj) => {
+          if (stateObj[0] === msg.timestamp.split(",")[0]) {
+            return [stateObj[0], [...stateObj[1], msg]];
+          }
+          return stateObj;
+        });
+        // console.log(updatedState);
+        return updatedState;
       });
-      // console.log(updatedState);
-      return updatedState;
-    });
-  }
+    }
   };
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -146,7 +146,7 @@ const MessageSection = () => {
     <div className="MessageSection" ref={messagesRef}>
       <SockJsClient
         url={SOCKET_URL}
-        topics={["/topic/"+channel]}
+        topics={["/topic/" + channel]}
         onMessage={(msg: any) => onMessageReceived(msg)}
         debug={false}
       />

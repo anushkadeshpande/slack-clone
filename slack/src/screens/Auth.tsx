@@ -19,7 +19,7 @@ const Auth = () => {
   const checkUser = () => {
     if (user?.password == password) {
       setRedirect(1);
-      fetch("http://192.168.1.37:8080/getUserProfile", {
+      fetch("https://slack-backend.up.railway.app/getUserProfile", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,19 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
-
+import { createSlice } from "@reduxjs/toolkit";
 
 export const menuSlice = createSlice({
-  name: 'menu',
+  name: "menu",
   initialState: {
     menu: false,
   },
-//actions
+  //actions
   reducers: {
-    showMenu:(state) => {
+    showMenu: (state) => {
       state.menu = true;
     },
-    hideMenu:(state) => {
+    hideMenu: (state) => {
       state.menu = false;
-    }
+    },
   },
 });
 

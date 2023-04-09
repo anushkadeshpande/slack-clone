@@ -11,7 +11,6 @@ const AddChannelDialog = ({
 
   if (addDialog) setOverlayVisible(true);
   else {
-    // setAddChannelResponse("")
     setOverlayVisible(false);
   }
   const addChannel = async () => {
@@ -21,7 +20,7 @@ const AddChannelDialog = ({
       newChannelNameRef.current?.value != ""
     ) {
       const addChannelRespPromsise = await fetch(
-        "http://192.168.1.37:8080/addChannel",
+        "https://slack-backend.up.railway.app/addChannel",
         {
           method: "POST",
           headers: {
@@ -40,7 +39,6 @@ const AddChannelDialog = ({
       } else setAddChannelResponse(addChannelResp);
 
       newChannelNameRef.current.value = "";
-      //   showAddDialog(false);
     } else setAddChannelResponse("Channel name cannot be empty");
   };
 

@@ -5,40 +5,44 @@ import { useSelector } from "react-redux";
 import { selectChannel } from "../features/currentChannelSlice";
 
 const ChatAreaInput = () => {
-  const user = useSelector(selectUser)
+  const user = useSelector(selectUser);
   const [chatInput, setChatInput] = useState("");
   const channel = useSelector(selectChannel);
 
   const sendMessage = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if(chatInput != "") {
-    fetch('http://192.168.1.37:8080/'+channel+'/send', {  
-    method: 'POST', 
-    // mode: 'cors', 
-    headers: {
-        'Content-Type': 'application/json'
-      },
-    body: JSON.stringify({
-        name: user.userName,
-        message: chatInput,
-        timestamp: new Date(Date.now()).toLocaleString("en-US", {timeZone: "Asia/Kolkata"})
-    })
+    if (chatInput != "") {
+      fetch("https://slack-backend.up.railway.app/" + channel + "/send", {
+        method: "POST",
+        // mode: 'cors',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: user.userName,
+          message: chatInput,
+          timestamp: new Date(Date.now()).toLocaleString("en-US", {
+            timeZone: "Asia/Kolkata",
+          }),
+        }),
+      }).then((response) => console.log(response));
 
-  }).then(response => console.log(response))
-
-  setChatInput("")
-}
-  }
+      setChatInput("");
+    }
+  };
   return (
     <div className="ChatAreaInput">
-      <textarea 
-      value={chatInput}
-      onChange={(e) => {
-        setChatInput(e.target.value);
-        // console.log(chatInput);
-      }}
+      <textarea
+        value={chatInput}
+        onChange={(e) => {
+          setChatInput(e.target.value);
+          // console.log(chatInput);
+        }}
       />
-      <button id="send" onClick={(e: React.MouseEvent<HTMLButtonElement>) => sendMessage(e)}>
+      <button
+        id="send"
+        onClick={(e: React.MouseEvent<HTMLButtonElement>) => sendMessage(e)}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"

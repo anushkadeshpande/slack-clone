@@ -14,19 +14,17 @@ import UserProfileMenu from "./UserProfileModal";
 const HeaderBar = () => {
   const menu = useSelector(selectMenu);
   const user = useSelector(selectUser);
-  const channel = useSelector(selectChannel)
+  const channel = useSelector(selectChannel);
 
   const dispatch = useDispatch();
-  const [ userMenu, setUserMenu ] = useState(false)
-  const [ showDialog, setShowDialog ] = useState(false)
+  const [userMenu, setUserMenu] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
   const navigate = useNavigate();
-  // const [ menu, setMenu ] = useState(false)
   const [overlayVisible, setOverlayVisible] = useState(false);
 
-
-  const handleModalVisibility = (modalVisible:boolean) => {
-    setShowDialog(modalVisible)
-  } 
+  const handleModalVisibility = (modalVisible: boolean) => {
+    setShowDialog(modalVisible);
+  };
 
   return (
     <div className="HeaderBar">
@@ -69,7 +67,11 @@ const HeaderBar = () => {
           </svg>
 
           <div id="searchField">
-            <input placeholder={"Search " + channel} autoComplete="false" disabled/>
+            <input
+              placeholder={"Search " + channel}
+              autoComplete="false"
+              disabled
+            />
 
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +106,12 @@ const HeaderBar = () => {
         </div>
       </div>
 
-      <div className="HeaderBar__accountSection" onClick={() => {setUserMenu(!userMenu)}}>
+      <div
+        className="HeaderBar__accountSection"
+        onClick={() => {
+          setUserMenu(!userMenu);
+        }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -120,9 +127,17 @@ const HeaderBar = () => {
           />
         </svg>
 
-        <div className="user_menu" style={userMenu? {display: "block"} : {display: "none"}}>
-        {/* Profile option */}
-          <div className="user_menu_option" onClick={() => {setShowDialog(true)}}>
+        <div
+          className="user_menu"
+          style={userMenu ? { display: "block" } : { display: "none" }}
+        >
+          {/* Profile option */}
+          <div
+            className="user_menu_option"
+            onClick={() => {
+              setShowDialog(true);
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -141,7 +156,14 @@ const HeaderBar = () => {
           </div>
 
           {/* Logout option */}
-          <div className="user_menu_option" style={{borderBottom: "none"}} onClick={()=> {dispatch(logout()); navigate("/")}}>
+          <div
+            className="user_menu_option"
+            style={{ borderBottom: "none" }}
+            onClick={() => {
+              dispatch(logout());
+              navigate("/");
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -165,7 +187,12 @@ const HeaderBar = () => {
       </div>
 
       {menu ? <SideBar view="mobile" /> : ""}
-      <UserProfileMenu show={showDialog} handleModalVisibility={handleModalVisibility} handleOverlay={setOverlayVisible} user={user} />
+      <UserProfileMenu
+        show={showDialog}
+        handleModalVisibility={handleModalVisibility}
+        handleOverlay={setOverlayVisible}
+        user={user}
+      />
     </div>
   );
 };

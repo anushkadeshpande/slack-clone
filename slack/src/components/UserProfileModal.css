@@ -1,136 +1,138 @@
 .Modal {
-    position: absolute;
-    z-index: 500;
-    top: 50%;
-    left: 50%;
-    background-color: #262627;
-    height: 320px;
-    width: 500px;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
-    /* display: none; */
+  position: absolute;
+  z-index: 500;
+  top: 50%;
+  left: 50%;
+  background-color: #262627;
+  height: 320px;
+  width: 500px;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  /* display: none; */
 }
 
 .Modal__contents {
-    height: calc( 100% - 50px);
+  height: calc(100% - 50px);
 }
 
 .modal-header {
-    display: flex;
+  display: flex;
 }
 
 .modal-header > h2 {
-    margin-left: 10px;
-    color: #fff;
-    margin-top: 10px;
+  margin-left: 10px;
+  color: #fff;
+  margin-top: 10px;
 }
 
 .close-button {
-    background-color: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    
-    display: flex;
-    margin-left: auto;
-    margin-right: 10px;
-    margin-top: 10px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  display: flex;
+  margin-left: auto;
+  margin-right: 10px;
+  margin-top: 10px;
 }
 
 .close-button > svg {
-    height: 30px;
-    color: aliceblue;
+  height: 30px;
+  color: aliceblue;
 }
 
 .userDp {
-    height: calc( 100% - 70px);
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    margin-top: 20px;
-    width: 30%;
-    border-right: 1px solid #6a6a6a;
-    padding-right: 20px;
-    box-sizing: border-box;
-    /* justify-content: center; */
+  height: calc(100% - 70px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  width: 30%;
+  border-right: 1px solid #6a6a6a;
+  padding-right: 20px;
+  box-sizing: border-box;
+  /* justify-content: center; */
 }
 
 .userDp__image {
-    /* margin-top: -20px; */
-    margin-left: 10px;
+  /* margin-top: -20px; */
+  margin-left: 10px;
 }
 
-.userDp__image > div, .userDp__image > div > div, .userDp__image > div > div > svg {
-    height: 86px !important;
-    width: 86px !important;
+.userDp__image > div,
+.userDp__image > div > div,
+.userDp__image > div > div > svg {
+  height: 86px !important;
+  width: 86px !important;
 }
 
 .userDp__colorOptions {
-    margin-left: 10px;
-    margin-top: 10px;
-    display: grid;
-    grid-template-columns: repeat(4, 22px);
-    grid-row-gap: 5px;
+  margin-left: 10px;
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 22px);
+  grid-row-gap: 5px;
 }
 
 .userDp__colorOptions > div:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .Modal__contents {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    /* justify-content: center; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* justify-content: center; */
 }
 
 .userPassword {
-    width: 70%;
-    height: calc( 100% - 50px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 70%;
+  height: calc(100% - 50px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .userPassword > h3 {
-    color: #fff;
-    margin-bottom: 20px;
-    margin-top: -20px;
+  color: #fff;
+  margin-bottom: 20px;
+  margin-top: -20px;
 }
 
 .userPassword > input {
-    margin-bottom: 20px;
-    padding: 3px;
-    outline: none;
-    background-color: #686868;
-    color: #fff;
-    border: none;
+  margin-bottom: 20px;
+  padding: 3px;
+  outline: none;
+  background-color: #686868;
+  color: #fff;
+  border: none;
 }
 
 .userPassword > input::placeholder {
-    color: #a4a4a4;
+  color: #a4a4a4;
 }
 
 .userPassword > button {
-    border: none;
-    outline: none;
-    padding: 7px;
-    font-weight: 600;
-    color: #fff;
-    border-radius: 5px;
-    background-color: #62206A;
-    cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 7px;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 5px;
+  background-color: #62206a;
+  cursor: pointer;
 }
 
-.userPassword > button:hover{
-    background-color: #45164a;
-    transition: 0.2s ease;
+.userPassword > button:hover {
+  background-color: #45164a;
+  transition: 0.2s ease;
 }
 
 @media screen and (max-width: 550px) {
-    .Modal {
-        width: 90vw;
-        flex-direction: column;
-        align-items: center;
-    }
+  .Modal {
+    width: 90vw;
+    flex-direction: column;
+    align-items: center;
+  }
 }

@@ -17,14 +17,17 @@ const Modal = ({ show, handleModalVisibility, handleOverlay, user }: any) => {
   const updateUserDp = (color: string) => {
     setDpCol(color);
     dispatch(changeUserDpColor(color));
-    fetch("http://192.168.1.37:8080/" + user.userName + "/updateUserDp", {
-      method: "PUT",
-      // mode: 'cors',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: color,
-    });
+    fetch(
+      "https://slack-backend.up.railway.app/" + user.userName + "/updateUserDp",
+      {
+        method: "PUT",
+        // mode: 'cors',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: color,
+      }
+    );
   };
 
   const updatePassword = async () => {
@@ -41,7 +44,9 @@ const Modal = ({ show, handleModalVisibility, handleOverlay, user }: any) => {
     // else check if new password matches the confirmation password
     else if (newPwdRef.current?.value === newPwdConfirmRef.current?.value) {
       const pwdChangeResponse = await fetch(
-        "http://192.168.1.37:8080/" + user.userName + "/changePassword",
+        "https://slack-backend.up.railway.app/" +
+          user.userName +
+          "/changePassword",
         {
           method: "PUT",
           // mode: 'cors',
@@ -124,7 +129,11 @@ const Modal = ({ show, handleModalVisibility, handleOverlay, user }: any) => {
           <h3>Change your password</h3>
           <input placeholder="Old Password" ref={oldPwdRef} type="password" />
           <input placeholder="New Password" ref={newPwdRef} type="password" />
-          <input placeholder="Confirm New Password" ref={newPwdConfirmRef} type="password" />
+          <input
+            placeholder="Confirm New Password"
+            ref={newPwdConfirmRef}
+            type="password"
+          />
           <button onClick={updatePassword}>Update Password</button>
           <p style={{ color: "#fff", marginTop: "10px" }}>
             {passwordChangeResponse}

@@ -62,7 +62,6 @@
   background: #424242;
 }
 
-
 @media screen and (max-width: 800px) {
   .ChatAreaInput {
     width: calc(100% - 240px);

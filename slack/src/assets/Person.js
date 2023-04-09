@@ -1,7 +1,6 @@
 import React from "react";
 
 const Person = ({ color }) => {
-  // console.log(color)
   return (
     <div
       style={{
