@@ -4,14 +4,19 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.example.slack.dto.UserProfile;
 import com.example.slack.dto.Users;
@@ -21,6 +26,7 @@ import com.google.gson.Gson;
 
 @RestController
 @CrossOrigin(origins = "*")
+@EnableWebMvc
 public class UserProfileController {
 
 	@Autowired
@@ -56,5 +62,16 @@ public class UserProfileController {
 	@GetMapping("/getAllUserProfiles")
 	public List<UserProfile> getAllUserProfiles() {
 		return userProfileRepo.findAll();
+	}
+	
+	@PutMapping("/{userName}/updateUserDp")
+	public void updateUserDp(@PathVariable String userName,@RequestBody String newDpCol) {
+		System.out.println(userName);
+		System.out.println(newDpCol);
+		Query query = new Query().addCriteria(Criteria.where("userName").is(userName));
+		Update updateDpCol = new Update().set("userDPCol", newDpCol);
+		FindAndModifyOptions options= new FindAndModifyOptions().upsert(true);
+		
+		mongoTemplate.findAndModify(query, updateDpCol, options, UserProfile.class);
 	}
 }

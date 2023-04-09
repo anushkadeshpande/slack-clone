@@ -13,7 +13,6 @@ public class Channel {
     private List<Message> messages;
       
     public Channel(String channelId, List<Message> messages) {
-		super();
 		this.channelId = channelId;
 		this.messages = messages;
 	}

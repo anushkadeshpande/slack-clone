@@ -1,7 +1,5 @@
 package com.example.slack.dto;
 
-import java.time.LocalDateTime;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
   
@@ -13,10 +11,11 @@ public class Message {
     private String name;
     private String message;
     
-	String timestamp;
+	private String timestamp;
       
+	public Message() {}
+	
     public Message(String name, String message, String timestamp) {
-        super();
         this.name = name;
         this.message = message;
         this.timestamp = timestamp;

@@ -13,11 +13,14 @@ export const userSlice = createSlice({
     },
     logout:(state) => {
       state.user = null;
+    },
+    changeUserDpColor: (state, color) => {
+      state.user.userDPCol = color.payload
     }
   },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, changeUserDpColor } = userSlice.actions;
 // selectors
 export const selectUser = (state) => state.user.user;
 

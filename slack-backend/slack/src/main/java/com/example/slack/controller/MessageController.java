@@ -37,37 +37,6 @@ public class MessageController {
 	@Autowired
 	private MessageRepository messageRepo;
 	
-//	@Autowired
-//	SimpMessagingTemplate template;
-	
-//	@Autowired
-//	ChannelController chController;
-	
-//	@Autowired
-//	private ChannelRepository channelRepo;
-	
-	@Autowired
-	private MongoTemplate mongoTemplate;
-	
-//	@PostMapping("/send")
-//	public ResponseEntity<Void> sendMessage(@RequestBody Message textMessageDTO) {
-//		// in current channel, append the message to the messages list
-//		
-//		messageRepo.save(textMessageDTO);		
-//		template.convertAndSend("/topic/message", textMessageDTO);
-//		return new ResponseEntity<>(HttpStatus.OK);
-//	}
-//	
-//	@MessageMapping("/sendMessage")
-//	public void receiveMessage(@Payload Message textMessageDTO) {
-//		// receive message from client
-//	}
-//
-//	@SendTo("/topic/message")
-//	public Message broadcastMessage(@Payload Message textMessageDTO) {
-//		return textMessageDTO;
-//	}
-	
 	public List<Message> getAllMessages(){
 		System.out.println(messageRepo.findAll());
 		return messageRepo.findAll();

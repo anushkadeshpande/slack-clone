@@ -43,6 +43,8 @@ public class ChannelController {
 	public ResponseEntity<Void> sendMessage(@PathVariable String channel, @RequestBody Message textMessageDTO) {
 		// in current channel, append the message to the messages list
 //		channelRepo.
+		
+		System.out.println(textMessageDTO);
 		Optional<Channel> result = channelRepo.findById(channel);
 		
 		Channel ch = result.get();

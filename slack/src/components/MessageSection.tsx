@@ -37,7 +37,7 @@ const MessageSection = () => {
 
         setAllUsers(u);
       });
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     fetch("http://192.168.1.37:8080/"+channel+"/getAllMessages")
@@ -57,7 +57,7 @@ const MessageSection = () => {
           )
         );
       });
-  }, [channel]);
+  }, [user, channel]);
 
   let onMessageReceived = (msg: any) => {
     if(messagesData.length == 0) 
