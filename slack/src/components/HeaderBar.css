@@ -93,6 +93,7 @@
   width: 100px;
   background-color: #3e3d42;
   border-radius: 10px;
+  z-index: 99;
 }
 
 .user_menu_option {
