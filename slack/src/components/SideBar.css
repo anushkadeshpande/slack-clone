@@ -4,8 +4,19 @@
   width: 250px;
   border-right: 1px solid #ffffff1a;
   color: #fff;
+  overflow-y: scroll;
+}
+.SideBar::-webkit-scrollbar {
+  width: 7px;
 }
 
+.SideBar::-webkit-scrollbar-track {
+  background: #1a1d21;
+}
+
+.SideBar::-webkit-scrollbar-thumb {
+  background: #797c7e;
+}
 .m_SideBar {
   position: absolute;
   top: 0;
