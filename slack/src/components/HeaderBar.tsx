@@ -27,6 +27,7 @@ const HeaderBar = () => {
   };
 
   return (
+    <>
     <div className="HeaderBar">
       {overlayVisible && <div className="overlay" />}
 
@@ -194,6 +195,7 @@ const HeaderBar = () => {
         user={user}
       />
     </div>
+    </>
   );
 };
 

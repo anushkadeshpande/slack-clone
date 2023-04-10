@@ -31,6 +31,10 @@ const SideBar = ({ view }: ChildComponentProps) => {
   }, [menu]);
 
   useEffect(() => {
+    setSelectedChannel(channel)
+  }, []);
+
+  useEffect(() => {
     dispatch(setChannel(selectedChannel));
   }, [selectedChannel]);
 

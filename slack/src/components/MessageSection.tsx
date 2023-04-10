@@ -144,13 +144,16 @@ const MessageSection = () => {
   // console.log(messagesData);
   return (
     <div className="MessageSection" ref={messagesRef}>
+      <div className="MessageSection__header" style={{position: "fixed", height: "25px", backgroundColor: "#1A1D21", width: "100%", marginBottom: "30px", display: "flex", alignItems: "center"}}>
+        <h3>{channel}</h3>
+      </div>
       <SockJsClient
         url={SOCKET_URL}
         topics={["/topic/" + channel]}
         onMessage={(msg: any) => onMessageReceived(msg)}
         debug={false}
       />
-
+      <div style={{height: "30px"}}></div>
       {messagesData.map((data) => (
         <>
           <div className="messages__date__section">

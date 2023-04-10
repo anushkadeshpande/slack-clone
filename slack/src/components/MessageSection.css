@@ -66,4 +66,10 @@
   #right-side-line {
     margin-right: 10px;
   }
+
+  .MessageSection__header {
+    display: none;
+    visibility: hidden;
+  }
+   
 }
