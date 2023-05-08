@@ -3,13 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout, login, selectUser } from "../features/userSlice";
 import { Navigate, useNavigate } from "react-router-dom";
 import "./Auth.css";
+import CryptoJS from "crypto-js";
+import salt from "../salt";
 
 const Auth = () => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(0);
-
+  const [ errMsg, setErrMsg ] = useState("") 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,7 +19,7 @@ const Auth = () => {
   }, []);
 
   const checkUser = () => {
-    if (user?.password == password) {
+    if (CryptoJS.AES.decrypt(user?.password, salt).toString(CryptoJS.enc.Utf8) === password) {
       setRedirect(1);
       fetch("https://slack-backend.up.railway.app/getUserProfile", {
         method: "POST",
@@ -35,7 +37,11 @@ const Auth = () => {
             dispatch(login(response));
           }
         });
-    } else setRedirect(2);
+        setErrMsg("")
+    } else {
+      setRedirect(2);
+      setErrMsg("Yikes! Looks like you did not enter the correct password!")
+    }
   };
   return (
     <div className="Auth">
@@ -55,7 +61,7 @@ const Auth = () => {
           type="password"
         />
       </div>
-
+    <p style={{color: '#000', fontWeight: "100", marginTop: "20px"}}>{errMsg}</p>
       <button
         className="Auth__submit"
         onClick={() => {

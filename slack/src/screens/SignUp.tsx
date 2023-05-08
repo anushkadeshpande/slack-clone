@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import { logout, login, selectUser } from "../features/userSlice";
+import CryptoJS from 'crypto-js';
+import salt from '../salt';
 import colors from "../assets/colorsRepo";
 
 import "./SignUp.css";
 
 const SignUp = () => {
+  console.log(salt)
   const dispatch = useDispatch();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +30,8 @@ const SignUp = () => {
       },
       body: JSON.stringify({
         userName: userName.toLowerCase(),
-        password: password,
+        // password: password,
+        password: CryptoJS.AES.encrypt(password, salt).toString(),
         userDPCol: colForThisUser,
       }),
     })
