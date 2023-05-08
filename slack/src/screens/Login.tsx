@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./Login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, login, selectUser } from "../features/userSlice";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -66,7 +66,7 @@ const Login = () => {
       >
         Continue
       </button>
-
+      <Link to='/signup'>Sign-up Instead</Link>
       {redirect === 0 ? (
         <Navigate to="/auth" />
       ) : redirect === 1 ? (

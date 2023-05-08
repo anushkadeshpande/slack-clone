@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 import { logout, login, selectUser } from "../features/userSlice";
 import colors from "../assets/colorsRepo";
 
@@ -86,6 +86,7 @@ const SignUp = () => {
           type="password"
         />
         <button onClick={() => registerUser()}>Sign Up!</button>
+        <Link to='/'>Log-in Instead</Link>
       </div>
 
       {redirect === 0 ? <Navigate to="/home" /> : ""}
