@@ -9,7 +9,6 @@ import colors from "../assets/colorsRepo";
 import "./SignUp.css";
 
 const SignUp = () => {
-  console.log(salt)
   const dispatch = useDispatch();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -37,10 +36,7 @@ const SignUp = () => {
     })
       .then((response) => response.text())
       .then((response) => {
-        // console.log(response)
         if (response == "") {
-          setRedirect(0);
-
           fetch("https://slack-backend.up.railway.app/addUserProfile", {
             method: "POST",
             headers: {
@@ -61,6 +57,7 @@ const SignUp = () => {
                 })
               );
             })
+            .then(()=> setRedirect(0))
         }
       });
   };

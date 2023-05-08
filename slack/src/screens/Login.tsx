@@ -32,7 +32,6 @@ const Login = () => {
       .then((response) => {
         if (response.userId != null) {
           setUserDetails(response);
-          // console.log(response)
           response.isUserAuthenticated = false;
           dispatch(login(response));
           setRedirect(0);

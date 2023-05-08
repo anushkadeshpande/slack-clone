@@ -25,7 +25,7 @@ const ChatAreaInput = () => {
             timeZone: "Asia/Kolkata",
           }),
         }),
-      }).then((response) => console.log(response));
+      })
 
       setChatInput("");
     }
@@ -36,7 +36,6 @@ const ChatAreaInput = () => {
         value={chatInput}
         onChange={(e) => {
           setChatInput(e.target.value);
-          // console.log(chatInput);
         }}
       />
       <button

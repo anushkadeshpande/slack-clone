@@ -15,7 +15,6 @@ interface channel {
 }
 
 const SideBar = ({ view }: ChildComponentProps) => {
-  // console.log(view);
   const menu = useSelector(selectMenu);
   const channel = useSelector(selectChannel);
   const dispatch = useDispatch();

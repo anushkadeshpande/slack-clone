@@ -26,7 +26,6 @@ const MessageSection = () => {
   const channel = useSelector(selectChannel);
   const [messagesData, setMessagesData] = useState<any[]>([]);
   const [allUsers, setAllUsers] = useState<Map<string, UserData>>(new Map());
-  // console.log(channel)
   useEffect(() => {
     fetch("https://slack-backend.up.railway.app/getAllUserProfiles")
       .then((data) => data.json())
@@ -43,7 +42,6 @@ const MessageSection = () => {
     fetch("https://slack-backend.up.railway.app/" + channel + "/getAllMessages")
       .then((data) => data.json())
       .then((data) => {
-        // console.log(data);
         setMessagesData(
           Object.entries(
             data.reduce((acc: any, cur: any) => {
@@ -70,7 +68,6 @@ const MessageSection = () => {
           }
           return stateObj;
         });
-        // console.log(updatedState);
         return updatedState;
       });
     }
@@ -141,7 +138,6 @@ const MessageSection = () => {
     return dateString;
   };
 
-  // console.log(messagesData);
   return (
     <div className="MessageSection" ref={messagesRef}>
       <div className="MessageSection__header" style={{position: "fixed", height: "25px", backgroundColor: "#1A1D21", width: "100%", marginBottom: "30px", display: "flex", alignItems: "center"}}>

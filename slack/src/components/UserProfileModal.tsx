@@ -85,8 +85,7 @@ const Modal = ({ show, handleModalVisibility, handleOverlay, user }: any) => {
           }
         );
         const pwdChangeResponseString = await pwdChangeResponse.text();
-        console.log(pwdChangeResponseString);
-        setPasswordChangeResponse(pwdChangeResponseString);
+        await setPasswordChangeResponse(pwdChangeResponseString);
         oldPwdRef.current.value = "";
         newPwdRef.current.value = "";
         newPwdConfirmRef.current.value = "";
