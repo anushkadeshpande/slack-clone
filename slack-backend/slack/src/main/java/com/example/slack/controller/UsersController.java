@@ -69,6 +69,14 @@ public class UsersController {
 		return users;
 	}
 	
+	@GetMapping("{username}/getCurrentPassword")
+	public String getCurrentPassword(@PathVariable String username) {
+		// get current password
+		List<Users> users = findUser(username);
+		String currentPassword = users.get(0).getPassword();
+		return currentPassword;
+	}
+	
 	@PutMapping("{username}/changePassword")
 	public String changePassword(@PathVariable String username, @RequestBody PasswordChangeModel pwdChngBody) {
 		// get current password
