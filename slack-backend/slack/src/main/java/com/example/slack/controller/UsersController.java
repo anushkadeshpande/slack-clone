@@ -79,13 +79,7 @@ public class UsersController {
 	
 	@PutMapping("{username}/changePassword")
 	public String changePassword(@PathVariable String username, @RequestBody PasswordChangeModel pwdChngBody) {
-		// get current password
-		List<Users> users = findUser(username);
-		String currentPassword = users.get(0).getPassword();
-		
-		// check if current password matches sent old password
-		if(currentPassword.equals(pwdChngBody.getOldPassword())) {
-			// if yes 
+
 			// update password
 			Query query = new Query().addCriteria(Criteria.where("userName").is(username));
 			Update updatePwd = new Update().set("password", pwdChngBody.getNewPassword());
@@ -95,17 +89,6 @@ public class UsersController {
 			
 			
 			return "Password changed successfully!";
-			
-		}
-		
-		else {
-			return "The current password is wrong";
-		}
-		
-		
-		
-		// else
-			// send error string
 		
 	}
 }

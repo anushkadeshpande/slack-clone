@@ -4,6 +4,8 @@ import Person from "../assets/Person";
 import colors from "../assets/colorsRepo";
 import { useDispatch } from "react-redux";
 import { changeUserDpColor } from "../features/userSlice";
+import salt from "../salt";
+import CryptoJS from "crypto-js";
 
 const Modal = ({ show, handleModalVisibility, handleOverlay, user }: any) => {
   const [dpCol, setDpCol] = useState(user.userDPCol);
@@ -43,28 +45,54 @@ const Modal = ({ show, handleModalVisibility, handleOverlay, user }: any) => {
       setPasswordChangeResponse("Please fill all the fields!");
     // else check if new password matches the confirmation password
     else if (newPwdRef.current?.value === newPwdConfirmRef.current?.value) {
-      const pwdChangeResponse = await fetch(
+      // get old encrypted passwd
+      const oldPassword = await fetch(
         "https://slack-backend.up.railway.app/" +
           user.userName +
-          "/changePassword",
+          "/getCurrentPassword",
         {
-          method: "PUT",
+          method: "GET",
           // mode: 'cors',
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            oldPassword: oldPwdRef.current?.value,
-            newPassword: newPwdRef.current?.value,
-          }),
         }
       );
-      const pwdChangeResponseString = await pwdChangeResponse.text();
-      console.log(pwdChangeResponseString);
-      setPasswordChangeResponse(pwdChangeResponseString);
-      oldPwdRef.current.value = "";
-      newPwdRef.current.value = "";
-      newPwdConfirmRef.current.value = "";
+      const oldChangeResponseString = await oldPassword.text();
+      // decrypt it
+      let oldPwd = CryptoJS.AES.decrypt(oldChangeResponseString, salt).toString(
+        CryptoJS.enc.Utf8
+      );
+
+      // match with entered old pwd
+      if (oldPwd == oldPwdRef.current?.value) {
+        const pwdChangeResponse = await fetch(
+          "https://slack-backend.up.railway.app/" +
+            user.userName +
+            "/changePassword",
+          {
+            method: "PUT",
+            // mode: 'cors',
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              newPassword: CryptoJS.AES.encrypt(
+                newPwdRef.current?.value,
+                salt
+              ).toString(),
+            }),
+          }
+        );
+        const pwdChangeResponseString = await pwdChangeResponse.text();
+        console.log(pwdChangeResponseString);
+        setPasswordChangeResponse(pwdChangeResponseString);
+        oldPwdRef.current.value = "";
+        newPwdRef.current.value = "";
+        newPwdConfirmRef.current.value = "";
+      }
+      else 
+      setPasswordChangeResponse("Old Password is incorrect!");
     } else {
       setPasswordChangeResponse("The passwords do not match!");
       oldPwdRef.current.value = "";

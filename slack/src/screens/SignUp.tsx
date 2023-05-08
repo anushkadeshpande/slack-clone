@@ -60,7 +60,7 @@ const SignUp = () => {
                   userDPCol: colForThisUser,
                 })
               );
-            });
+            })
         }
       });
   };

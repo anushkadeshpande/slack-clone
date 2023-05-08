@@ -1,15 +1,8 @@
 package com.example.slack.model;
 
 public class PasswordChangeModel {
-	private String oldPassword;
 	private String newPassword;
 	
-	public String getOldPassword() {
-		return oldPassword;
-	}
-	public void setOldPassword(String oldPassword) {
-		this.oldPassword = oldPassword;
-	}
 	public String getNewPassword() {
 		return newPassword;
 	}
