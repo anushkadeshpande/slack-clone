@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { changeUserDpColor } from "../features/userSlice";
 import salt from "../salt";
 import CryptoJS from "crypto-js";
+import { BACKEND_URL } from "../endpoints";
 
 const Modal = ({ show, handleModalVisibility, handleOverlay, user }: any) => {
   const [dpCol, setDpCol] = useState(user.userDPCol);
@@ -20,7 +21,7 @@ const Modal = ({ show, handleModalVisibility, handleOverlay, user }: any) => {
     setDpCol(color);
     dispatch(changeUserDpColor(color));
     fetch(
-      "https://slack-backend.up.railway.app/" + user.userName + "/updateUserDp",
+      BACKEND_URL + user.userName + "/updateUserDp",
       {
         method: "PUT",
         // mode: 'cors',
@@ -47,7 +48,7 @@ const Modal = ({ show, handleModalVisibility, handleOverlay, user }: any) => {
     else if (newPwdRef.current?.value === newPwdConfirmRef.current?.value) {
       // get old encrypted passwd
       const oldPassword = await fetch(
-        "https://slack-backend.up.railway.app/" +
+        BACKEND_URL +
           user.userName +
           "/getCurrentPassword",
         {
@@ -67,7 +68,7 @@ const Modal = ({ show, handleModalVisibility, handleOverlay, user }: any) => {
       // match with entered old pwd
       if (oldPwd == oldPwdRef.current?.value) {
         const pwdChangeResponse = await fetch(
-          "https://slack-backend.up.railway.app/" +
+          BACKEND_URL +
             user.userName +
             "/changePassword",
           {

@@ -4,6 +4,7 @@ import Person from "../assets/Person";
 import { selectUser } from "../features/userSlice";
 import { selectChannel } from "../features/currentChannelSlice";
 import "./MessageSection.css";
+import { BACKEND_URL, SOCKET_URL, GET_ALL_USER_PROFILES_URL } from '../endpoints'
 
 import SockJsClient from "react-stomp";
 
@@ -19,7 +20,6 @@ interface messData {
   message: string;
 }
 
-const SOCKET_URL = "https://slack-backend.up.railway.app/ws-message";
 const MessageSection = () => {
   const messagesRef = useRef<HTMLDivElement>(null);
   const user = useSelector(selectUser);
@@ -27,7 +27,7 @@ const MessageSection = () => {
   const [messagesData, setMessagesData] = useState<any[]>([]);
   const [allUsers, setAllUsers] = useState<Map<string, UserData>>(new Map());
   useEffect(() => {
-    fetch("https://slack-backend.up.railway.app/getAllUserProfiles")
+    fetch(GET_ALL_USER_PROFILES_URL)
       .then((data) => data.json())
       .then((data) => {
         const u = new Map();
@@ -39,7 +39,7 @@ const MessageSection = () => {
   }, [user]);
 
   useEffect(() => {
-    fetch("https://slack-backend.up.railway.app/" + channel + "/getAllMessages")
+    fetch(BACKEND_URL + channel + "/getAllMessages")
       .then((data) => data.json())
       .then((data) => {
         setMessagesData(

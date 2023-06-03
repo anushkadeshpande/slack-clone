@@ -25,3 +25,5 @@ yarn-error.log*
 .vscode
 /firebase.js
 /src/salt.js
+
+/src/endpoints.js

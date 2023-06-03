@@ -7,6 +7,7 @@ import salt from '../salt';
 import colors from "../assets/colorsRepo";
 
 import "./SignUp.css";
+import { ADD_USER_PROFILE_URL, REGISTER_USER_URL } from "../endpoints";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const SignUp = () => {
   }, []);
 
   const registerUser = () => {
-    fetch("https://slack-backend.up.railway.app/registerUser", {
+    fetch(REGISTER_USER_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,7 +38,7 @@ const SignUp = () => {
       .then((response) => response.text())
       .then((response) => {
         if (response == "") {
-          fetch("https://slack-backend.up.railway.app/addUserProfile", {
+          fetch(ADD_USER_PROFILE_URL, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

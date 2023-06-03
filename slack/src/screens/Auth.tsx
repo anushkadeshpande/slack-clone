@@ -5,6 +5,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import "./Auth.css";
 import CryptoJS from "crypto-js";
 import salt from "../salt";
+import { GET_USER_PROFILE } from "../endpoints";
 
 const Auth = () => {
   const user = useSelector(selectUser);
@@ -21,7 +22,7 @@ const Auth = () => {
   const checkUser = () => {
     if (CryptoJS.AES.decrypt(user?.password, salt).toString(CryptoJS.enc.Utf8) === password) {
       setRedirect(1);
-      fetch("https://slack-backend.up.railway.app/getUserProfile", {
+      fetch(GET_USER_PROFILE, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

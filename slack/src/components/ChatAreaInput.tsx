@@ -3,6 +3,7 @@ import "./ChatAreaInput.css";
 import { selectUser } from "../features/userSlice";
 import { useSelector } from "react-redux";
 import { selectChannel } from "../features/currentChannelSlice";
+import { BACKEND_URL } from "../endpoints"; 
 
 const ChatAreaInput = () => {
   const user = useSelector(selectUser);
@@ -12,7 +13,7 @@ const ChatAreaInput = () => {
   const sendMessage = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (chatInput != "") {
-      fetch("https://slack-backend.up.railway.app/" + channel + "/send", {
+      fetch(BACKEND_URL + channel + "/send", {
         method: "POST",
         // mode: 'cors',
         headers: {

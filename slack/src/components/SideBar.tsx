@@ -5,6 +5,7 @@ import { setChannel, selectChannel } from "../features/currentChannelSlice";
 
 import "./SideBar.css";
 import AddChannelDialog from "./AddChannelDialog";
+import { GET_CHANNELS_LIST_URL } from "../endpoints";
 
 interface ChildComponentProps {
   view: String;
@@ -40,7 +41,7 @@ const SideBar = ({ view }: ChildComponentProps) => {
   useEffect(() => {
     const getChannelsList = async () => {
       const channelsPromise = await fetch(
-        "https://slack-backend.up.railway.app/getChannelsList"
+        GET_CHANNELS_LIST_URL
       );
       const channelsListJson = await channelsPromise.json();
       setChannelsList(channelsListJson);

@@ -3,6 +3,7 @@ import "./Login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, login, selectUser } from "../features/userSlice";
 import { Navigate, useNavigate, Link } from "react-router-dom";
+import { CHECK_USER_URL } from "../endpoints";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const Login = () => {
   }, []);
 
   const checkUser = () => {
-    fetch("https://slack-backend.up.railway.app/checkUser", {
+    fetch(CHECK_USER_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

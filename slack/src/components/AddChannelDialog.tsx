@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import "./AddChannelDialog.css";
+import { ADD_CHANNEL_URL } from '../endpoints'
 
 const AddChannelDialog = ({
   addDialog,
@@ -20,7 +21,7 @@ const AddChannelDialog = ({
       newChannelNameRef.current?.value != ""
     ) {
       const addChannelRespPromsise = await fetch(
-        "https://slack-backend.up.railway.app/addChannel",
+        ADD_CHANNEL_URL,
         {
           method: "POST",
           headers: {
